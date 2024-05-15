@@ -5,7 +5,6 @@ import sync_time
 import battery_reading
 import on_disk_storage
 import bno_initializer
-import quaternion_calculation
 from adafruit_debouncer import Debouncer
 
 button_pin = digitalio.DigitalInOut(board.D13)
@@ -26,7 +25,7 @@ write_interval = 180
 
 while True:
     button.update()
-    roll, pitch, yaw = quaternion_calculation.calculate_angle(bno.quaternion)
+    quaternion = bno.quaternion
 
     if button.fell:
         timestamp = time.time()
@@ -51,10 +50,8 @@ while True:
             stability,
             activity,
             activity_confidence,
-            roll,
-            pitch,
-            yaw,
             calibration_status,
+            *quaternion,
         )
 
     if time.monotonic() - last_write_time > write_interval and button.value:
