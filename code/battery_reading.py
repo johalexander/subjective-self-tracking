@@ -9,11 +9,9 @@ battery_voltage_pin = analogio.AnalogIn(board.VOLTAGE_MONITOR)
 
 
 def log_battery_voltage():
-    # Read the raw value and convert to voltage
-    # The multiplier adjustment (2 * 1.1 * 3.3) should matches the hardware setup
     timestamp = time.time()
     raw_value = battery_voltage_pin.value
-    voltage_level = (raw_value / max_analog_val) * 2 * 1.1 * 3.3
+    voltage_level = (raw_value / max_analog_val) * 2 * 3.3
     battery_fraction = voltage_level / max_battery_voltage
     with open("battery.csv", "a") as f:
         f.write(
@@ -21,11 +19,13 @@ def log_battery_voltage():
                 timestamp,
                 raw_value,
                 voltage_level,
-                battery_fraction,
+                battery_fraction * 100,
             )
         )
 
         print(
+            "Timestamp:",
+            timestamp,
             "Raw:",
             raw_value,
             "Voltage (V):",

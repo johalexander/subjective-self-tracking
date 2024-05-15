@@ -8,9 +8,6 @@ import bno_initializer
 import quaternion_calculation
 from adafruit_debouncer import Debouncer
 
-sync_time.sync_rtc()
-bno = bno_initializer.init()
-
 button_pin = digitalio.DigitalInOut(board.D13)
 button_pin.direction = digitalio.Direction.INPUT
 button_pin.pull = digitalio.Pull.UP
@@ -19,6 +16,9 @@ button = Debouncer(button_pin)
 motor_pin = digitalio.DigitalInOut(board.D12)
 motor_pin.direction = digitalio.Direction.OUTPUT
 motor_pin.value = False
+
+sync_time.sync_rtc()
+bno = bno_initializer.init()
 
 last_write_time = time.monotonic()
 write_interval = 180
