@@ -1,17 +1,11 @@
 import math
 
 
-def calculate_angle(quaternion):
-    """
-    Method retrieves a quaternion from BNO08X and uses quaternion_to_euler to convert.
-    Returns euler angles (roll, pitch, yaw) as degrees.
-    """
+def calculate_angles(quaternion):
     roll, pitch, yaw = quaternion_to_euler(*quaternion)
-
     roll_deg = math.degrees(roll)
     pitch_deg = math.degrees(pitch)
     yaw_deg = math.degrees(yaw)
-
     return roll_deg, pitch_deg, yaw_deg
 
 
