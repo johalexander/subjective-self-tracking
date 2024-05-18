@@ -9,36 +9,29 @@ import Foundation
 import SwiftUI
 
 struct NavigationList: View {
-    @Environment(ModelData.self) var modelData
     @EnvironmentObject var server: Server
+    @EnvironmentObject var manager: DataModelManager
     @State private var selectedItem: Item?
     
-    @State var contentSelection: ContentSelection?
     @State var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
     
     var title: String {
         return (selectedItem?.imageName ?? "") + (selectedItem?.title ?? "")
     }
-    
-    enum ContentSelection: Hashable {
-        case one
-        case two
-    }
 
     var body: some View {
-        @Bindable var modelData = modelData
-        
         NavigationSplitView(columnVisibility: $columnVisibility) {
             List(selection: $selectedItem) {
-                let item = modelData.navItems[0]
+                let item = manager.navItems[0]
                 NavigationLink {
                     Learn(item: item)
+                        .environmentObject(manager)
                 } label: {
                     NavigationItem(item: item)
                 }
                 .tag(item)
                 
-                let item2 = modelData.navItems[1]
+                let item2 = manager.navItems[1]
                 NavigationLink {
                     Experiments(item: item2)
                 } label: {
@@ -46,7 +39,7 @@ struct NavigationList: View {
                 }
                 .tag(item2)
                 
-                let item3 = modelData.navItems[2]
+                let item3 = manager.navItems[2]
                 NavigationLink {
                     Settings(item: item3)
                         .environmentObject(server)
@@ -58,7 +51,7 @@ struct NavigationList: View {
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
             .navigationTitle(title)
             .onAppear {
-                if selectedItem == nil, let firstItem = modelData.navItems.first {
+                if selectedItem == nil, let firstItem = manager.navItems.first {
                     selectedItem = firstItem
                 }
             }
@@ -70,7 +63,7 @@ struct NavigationList: View {
 
 #Preview {
     NavigationList()
-        .environment(ModelData())
         .environmentObject(Server())
+        .environmentObject(DataModelManager())
 }
 

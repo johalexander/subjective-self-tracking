@@ -28,11 +28,13 @@ struct experiments_macosApp: App {
     }()
 
     @StateObject private var server = Server()
+    @StateObject private var manager = DataModelManager.shared
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(server)
+                .environmentObject(manager)
                 .onAppear {
                     Task { await server.start() }
                 }
@@ -64,6 +66,7 @@ class Server: ObservableObject {
             try configure(app)
             app.http.server.configuration.port = 8080
             self.port = app.http.server.configuration.port
+            app.http.server.configuration.hostname = "192.168.0.3"
             
             // This must be called on the main thread
             let executorTakeoverSuccess = NIOSingletons.unsafeTryInstallSingletonPosixEventLoopGroupAsConcurrencyGlobalExecutor()

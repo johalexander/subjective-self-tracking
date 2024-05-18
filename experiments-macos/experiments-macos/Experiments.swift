@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct Experiments: View {
-    @Environment(ModelData.self) var modelData
     var item: Item
     
     var title: String {
@@ -17,8 +16,6 @@ struct Experiments: View {
     }
 
     var body: some View {
-        @Bindable var modelData = modelData
-
         NavigationStack {
             ScrollView {
                 Text("Hey")
@@ -34,5 +31,4 @@ struct Experiments: View {
 
 #Preview {
     Experiments(item: Item(title: "Learn", imageName: "💪🏻"))
-        .environment(ModelData())
 }

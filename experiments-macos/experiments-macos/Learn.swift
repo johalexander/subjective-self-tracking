@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Learn: View {
-    @Environment(ModelData.self) var modelData
+    @EnvironmentObject var manager: DataModelManager
     var item: Item
     
     var title: String {
@@ -17,8 +17,6 @@ struct Learn: View {
     }
 
     var body: some View {
-        @Bindable var modelData = modelData
-
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
@@ -81,9 +79,6 @@ struct Learn: View {
                     Divider()
                     
                     DisclosureGroup("What do I need to know?") {
-                        
-                        //Text("What do I need to know?")
-                        //    .font(.title2)
                         VStack(alignment: .leading, spacing: 5) {
                             Text("Understanding Euler angles")
                                 .font(.title3)
@@ -139,7 +134,8 @@ struct Learn: View {
                     HStack {
                         Spacer()
                         NavigationLink {
-                            
+                            Practice(item: item)
+                                .environmentObject(manager)
                         } label: {
                             Text("Let's try it out!")
                         }
@@ -157,5 +153,5 @@ struct Learn: View {
 
 #Preview {
     Learn(item: Item(title: "Learn", imageName: "💪🏻"))
-        .environment(ModelData())
+        .environmentObject(DataModelManager())
 }

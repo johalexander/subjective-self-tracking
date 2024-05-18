@@ -13,7 +13,6 @@
 		5CD3DA382BF8097500B794FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CD3DA372BF8097500B794FF /* Assets.xcassets */; };
 		5CD3DA3B2BF8097500B794FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CD3DA3A2BF8097500B794FF /* Preview Assets.xcassets */; };
 		5CD3DA432BF80F2B00B794FF /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA422BF80F2B00B794FF /* NavigationItem.swift */; };
-		5CD3DA452BF8184E00B794FF /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA442BF8184E00B794FF /* ModelData.swift */; };
 		5CD3DA472BF8198200B794FF /* NavigationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA462BF8198200B794FF /* NavigationList.swift */; };
 		5CD3DA492BF822C200B794FF /* Learn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA482BF822C200B794FF /* Learn.swift */; };
 		5CD3DA4D2BF8339600B794FF /* Experiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA4C2BF8339600B794FF /* Experiments.swift */; };
@@ -24,6 +23,10 @@
 		5CD3DA5D2BF8DBF600B794FF /* Experiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA5C2BF8DBF600B794FF /* Experiment.swift */; };
 		5CD3DA5F2BF8E77C00B794FF /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA5E2BF8E77C00B794FF /* CircleImage.swift */; };
 		5CD3DA612BF8FA4F00B794FF /* SquareImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA602BF8FA4F00B794FF /* SquareImage.swift */; };
+		5CD3DA632BF92D0500B794FF /* Practice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA622BF92D0400B794FF /* Practice.swift */; };
+		5CD3DA652BF9333C00B794FF /* Greyscales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA642BF9333C00B794FF /* Greyscales.swift */; };
+		5CD3DA672BF942CB00B794FF /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA662BF942CB00B794FF /* Numbers.swift */; };
+		5CD3DA692BF963FB00B794FF /* DataModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA682BF963FB00B794FF /* DataModelManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +38,6 @@
 		5CD3DA3A2BF8097500B794FF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5CD3DA3C2BF8097500B794FF /* experiments_macos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = experiments_macos.entitlements; sourceTree = "<group>"; };
 		5CD3DA422BF80F2B00B794FF /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
-		5CD3DA442BF8184E00B794FF /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		5CD3DA462BF8198200B794FF /* NavigationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationList.swift; sourceTree = "<group>"; };
 		5CD3DA482BF822C200B794FF /* Learn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Learn.swift; sourceTree = "<group>"; };
 		5CD3DA4C2BF8339600B794FF /* Experiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experiments.swift; sourceTree = "<group>"; };
@@ -45,6 +47,10 @@
 		5CD3DA5C2BF8DBF600B794FF /* Experiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experiment.swift; sourceTree = "<group>"; };
 		5CD3DA5E2BF8E77C00B794FF /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		5CD3DA602BF8FA4F00B794FF /* SquareImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareImage.swift; sourceTree = "<group>"; };
+		5CD3DA622BF92D0400B794FF /* Practice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Practice.swift; sourceTree = "<group>"; };
+		5CD3DA642BF9333C00B794FF /* Greyscales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Greyscales.swift; sourceTree = "<group>"; };
+		5CD3DA662BF942CB00B794FF /* Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
+		5CD3DA682BF963FB00B794FF /* DataModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,11 +87,14 @@
 				5CD3DA312BF8097300B794FF /* experiments_macosApp.swift */,
 				5CD3DA332BF8097300B794FF /* ContentView.swift */,
 				5CD3DA582BF839CE00B794FF /* Server.swift */,
+				5CD3DA682BF963FB00B794FF /* DataModelManager.swift */,
 				5CD3DA5A2BF8DB7700B794FF /* Participant.swift */,
 				5CD3DA5C2BF8DBF600B794FF /* Experiment.swift */,
 				5CD3DA462BF8198200B794FF /* NavigationList.swift */,
-				5CD3DA442BF8184E00B794FF /* ModelData.swift */,
 				5CD3DA482BF822C200B794FF /* Learn.swift */,
+				5CD3DA622BF92D0400B794FF /* Practice.swift */,
+				5CD3DA642BF9333C00B794FF /* Greyscales.swift */,
+				5CD3DA662BF942CB00B794FF /* Numbers.swift */,
 				5CD3DA5E2BF8E77C00B794FF /* CircleImage.swift */,
 				5CD3DA602BF8FA4F00B794FF /* SquareImage.swift */,
 				5CD3DA4C2BF8339600B794FF /* Experiments.swift */,
@@ -186,15 +195,18 @@
 				5CD3DA612BF8FA4F00B794FF /* SquareImage.swift in Sources */,
 				5CD3DA5D2BF8DBF600B794FF /* Experiment.swift in Sources */,
 				5CD3DA592BF839CE00B794FF /* Server.swift in Sources */,
+				5CD3DA632BF92D0500B794FF /* Practice.swift in Sources */,
 				5CD3DA4D2BF8339600B794FF /* Experiments.swift in Sources */,
 				5CD3DA5F2BF8E77C00B794FF /* CircleImage.swift in Sources */,
 				5CD3DA342BF8097300B794FF /* ContentView.swift in Sources */,
 				5CD3DA492BF822C200B794FF /* Learn.swift in Sources */,
 				5CD3DA362BF8097300B794FF /* Item.swift in Sources */,
-				5CD3DA452BF8184E00B794FF /* ModelData.swift in Sources */,
+				5CD3DA672BF942CB00B794FF /* Numbers.swift in Sources */,
 				5CD3DA432BF80F2B00B794FF /* NavigationItem.swift in Sources */,
 				5CD3DA5B2BF8DB7700B794FF /* Participant.swift in Sources */,
+				5CD3DA692BF963FB00B794FF /* DataModelManager.swift in Sources */,
 				5CD3DA4F2BF8339C00B794FF /* Settings.swift in Sources */,
+				5CD3DA652BF9333C00B794FF /* Greyscales.swift in Sources */,
 				5CD3DA322BF8097300B794FF /* experiments_macosApp.swift in Sources */,
 				5CD3DA472BF8198200B794FF /* NavigationList.swift in Sources */,
 			);

@@ -8,6 +8,9 @@ func routes(_ app: Application) throws {
         let data = try req.content.decode(DataModel.self)
         print("Received data: \(data)")
         saveDataToFile(data)
+        
+        DataModelManager.shared.markDataReceived()
+        
         return .ok
     }
 }
@@ -18,14 +21,15 @@ struct DataModel: Content {
     var stability: String
     var activity: String
     var activity_confidence: Int
-    var roll: Double
-    var pitch: Double
-    var yaw: Double
     var calibration_status: Int
+    var w: Double
+    var x: Double
+    var y: Double
+    var z: Double
 }
 
 func saveDataToFile(_ data: DataModel) {
-    let log = "\(data.timestamp),\(data.duration),\(data.stability),\(data.activity),\(data.activity_confidence),\(data.roll),\(data.pitch),\(data.yaw),\(data.calibration_status)\n"
+    let log = "\(data.timestamp),\(data.duration),\(data.stability),\(data.activity),\(data.activity_confidence),\(data.calibration_status),\(data.w),\(data.x),\(data.y),\(data.z),\n"
     let fileURL = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("data_log.txt")
     do {
         let handle = try FileHandle(forWritingTo: fileURL)
