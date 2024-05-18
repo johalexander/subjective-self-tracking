@@ -27,7 +27,6 @@ struct experiments_macosApp: App {
         }
     }()
 
-    // Create an instance of the Server
     @StateObject private var server = Server()
 
     var body: some Scene {
@@ -40,8 +39,10 @@ struct experiments_macosApp: App {
                 .onDisappear {
                     server.stop()
                 }
+                .frame(minWidth: 1024, minHeight: 500)
         }
         .modelContainer(sharedModelContainer)
+        .windowResizability(.contentSize)
     }
 }
 

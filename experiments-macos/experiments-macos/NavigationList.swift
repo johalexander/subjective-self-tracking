@@ -48,7 +48,7 @@ struct NavigationList: View {
                 
                 let item3 = modelData.navItems[2]
                 NavigationLink {
-                    Settings()
+                    Settings(item: item3)
                         .environmentObject(server)
                 } label: {
                     NavigationItem(item: item3)
