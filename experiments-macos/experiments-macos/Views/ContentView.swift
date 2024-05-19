@@ -9,18 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @EnvironmentObject var server: Server
-    @EnvironmentObject var manager: DataModelManager
+    @EnvironmentObject var vm: DataViewModel
     
     var body: some View {
         NavigationList()
-            .environmentObject(server)
-            .environmentObject(manager)
+            .environmentObject(vm)
     }
 }
 
 #Preview {
     ContentView()
-        .environmentObject(Server())
-        .environmentObject(DataModelManager())
+        .environmentObject(DataViewModel())
 }

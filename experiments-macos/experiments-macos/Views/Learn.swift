@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct Learn: View {
-    @EnvironmentObject var manager: DataModelManager
+    @EnvironmentObject var vm: DataViewModel
     var item: Item
     
     var title: String {
@@ -135,7 +135,7 @@ struct Learn: View {
                         Spacer()
                         NavigationLink {
                             Practice(item: item)
-                                .environmentObject(manager)
+                                .environmentObject(vm)
                         } label: {
                             Text("Let's try it out!")
                         }
@@ -153,5 +153,5 @@ struct Learn: View {
 
 #Preview {
     Learn(item: Item(title: "Learn", imageName: "💪🏻"))
-        .environmentObject(DataModelManager())
+        .environmentObject(DataViewModel())
 }

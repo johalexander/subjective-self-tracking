@@ -9,13 +9,9 @@ import Foundation
 import SwiftUI
 
 struct Practice: View {
-    @EnvironmentObject var manager: DataModelManager
+    @EnvironmentObject var vm: DataViewModel
     var item: Item
     
-    private var colorRepository = Greyscales()
-    private var numberRepository = Numbers()
-    @State private var selectedColor: Color = .white
-    @State private var selectedNumber: String = ""
     @State private var input: Double = 0
     
     @State private var selectedStimuli = "Greyscale"
@@ -27,14 +23,11 @@ struct Practice: View {
     @State private var selectedMovement = "Pitch"
     var movements = ["Pitch", "Roll"]
     
+    @State private var selectedColor: Color = DataViewModel.sharedSingleton.getColor()
+    @State private var selectedNumber: String = DataViewModel.sharedSingleton.getNumber()
+    
     var title: String {
         return (item.imageName) + " " + (item.title)
-    }
-    
-    init(item: Item) {
-        self.item = item
-        selectedColor = colorRepository.currentColor ?? .white
-        selectedNumber = numberRepository.currentNumber
     }
 
     var body: some View {
@@ -98,6 +91,8 @@ struct Practice: View {
                                 } else {
                                     Text("Adjust the slider to match the number as closely as possible")
                                 }
+                                
+                                Text("Click the \"Next\" button to indicate a response")
                             }
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
@@ -170,7 +165,7 @@ struct Practice: View {
                             .foregroundStyle(.secondary)
                             
                             ZStack {
-                                if manager.receivedData {
+                                if vm.receivedData {
                                     HStack(spacing: 10) {
                                         Image(systemName: "checkmark.circle")
                                             .resizable()
@@ -185,7 +180,7 @@ struct Practice: View {
                                     }
                                 }
                             }
-                            .animation(.easeIn, value: manager.receivedData)
+                            .animation(.easeIn, value: vm.receivedData)
                             
                             DisclosureGroup("Reference scales") {
                                 SquareImage(image: Image("GreyscaleValues").resizable())
@@ -195,12 +190,13 @@ struct Practice: View {
                         }
                         .padding()
                         .animation(.easeIn, value: selectedStimuli)
+                        .animation(.easeIn, value: selectedMovement)
                     }
                 }
                 .animation(/*@START_MENU_TOKEN@*/.easeIn/*@END_MENU_TOKEN@*/, value: selectedMode)
             }
             .padding()
-            .onChange(of: manager.receivedData, { oldValue, newValue in
+            .onChange(of: vm.receivedData, { oldValue, newValue in
                 if oldValue && !newValue {
                     consume()
                 }
@@ -210,17 +206,15 @@ struct Practice: View {
     }
     
     func consume() {
-        withAnimation(.easeInOut) {
-            colorRepository.consume()
-            numberRepository.consume()
-            
-            selectedColor = colorRepository.currentColor ?? .white
-            selectedNumber = numberRepository.currentNumber
+        withAnimation(.easeIn) {
+            vm.consume()
+            selectedColor = vm.getColor()
+            selectedNumber = vm.getNumber()
         }
     }
 }
 
 #Preview {
     Practice(item: Item(title: "Practice", imageName: "💪🏻"))
-        .environmentObject(DataModelManager())
+        .environmentObject(DataViewModel())
 }

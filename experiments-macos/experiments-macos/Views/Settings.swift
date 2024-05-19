@@ -8,15 +8,8 @@
 import SwiftUI
 
 struct Settings: View {
-    @EnvironmentObject var server: Server
+    @EnvironmentObject var vm: DataViewModel
     var item: Item
-    
-    @State private var participants = [
-        Participant(age: 20, genderIdentity: "Male", completedExperiments: []),
-        Participant(age: 25, genderIdentity: "Male", completedExperiments: []),
-        Participant(age: 32, genderIdentity: "Male", completedExperiments: []),
-        Participant(age: 24, genderIdentity: "Male", completedExperiments: []),
-    ]
     
     var title: String {
         return (item.imageName) + " " + (item.title)
@@ -35,15 +28,15 @@ struct Settings: View {
                             
                             Divider()
                             
-                            Text("Status: \(server.isRunning ? "Running" : "Stopped")")
+                            Text("Status: \(vm.isRunning ? "Running" : "Stopped")")
                                 .font(.headline)
-                                .foregroundColor(server.isRunning ? .green : .red)
+                                .foregroundColor(vm.isRunning ? .green : .red)
                             
-                            if server.isRunning {
+                            if vm.isRunning {
                                 Spacer()
-                                Text("IP Address: \(server.ipAddress)")
+                                Text("IP Address: \(vm.ipAddress)")
                                     .font(.callout)
-                                Text("Port: \(String(server.port))")
+                                Text("Port: \(String(vm.port))")
                                     .font(.callout)
                             }
                         }
@@ -64,7 +57,7 @@ struct Settings: View {
                             }
                             
                             Divider()
-                            Table(participants) {
+                            Table(vm.participants) {
                                 TableColumn("Id", value: \.id.uuidString)
                                 TableColumn("Age", value: \.ageString)
                                 TableColumn("Gender identity", value: \.genderIdentity)
@@ -93,5 +86,5 @@ struct Settings: View {
 
 #Preview {
     Settings(item: Item(title: "Settings", imageName: "⚙️"))
-        .environmentObject(Server())
+        .environmentObject(DataViewModel())
 }

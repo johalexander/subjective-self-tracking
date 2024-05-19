@@ -5,17 +5,17 @@ import NIOPosix
 
 func routes(_ app: Application) throws {
     app.post("data") { req -> HTTPStatus in
-        let data = try req.content.decode(DataModel.self)
+        let data = try req.content.decode(SensorReading.self)
         print("Received data: \(data)")
         saveDataToFile(data)
         
-        DataModelManager.shared.markDataReceived()
+        DataViewModel.sharedSingleton.markDataReceived()
         
         return .ok
     }
 }
 
-struct DataModel: Content {
+struct SensorReading: Content {
     var timestamp: TimeInterval
     var duration: Int
     var stability: String
@@ -28,7 +28,7 @@ struct DataModel: Content {
     var z: Double
 }
 
-func saveDataToFile(_ data: DataModel) {
+func saveDataToFile(_ data: SensorReading) {
     let log = "\(data.timestamp),\(data.duration),\(data.stability),\(data.activity),\(data.activity_confidence),\(data.calibration_status),\(data.w),\(data.x),\(data.y),\(data.z),\n"
     let fileURL = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("data_log.txt")
     do {

@@ -13,7 +13,7 @@ import NIOCore
 import NIOPosix
 
 @main
-struct experiments_macosApp: App {
+struct SubjectiveSelfTrackingApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -27,21 +27,20 @@ struct experiments_macosApp: App {
         }
     }()
 
-    @StateObject private var server = Server()
-    @StateObject private var manager = DataModelManager.shared
+    private var server = Server()
+    @StateObject private var vm = DataViewModel.sharedSingleton
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(server)
-                .environmentObject(manager)
+                .environmentObject(vm)
                 .onAppear {
                     Task { await server.start() }
                 }
                 .onDisappear {
                     server.stop()
                 }
-                .frame(minWidth: 1024, minHeight: 500)
+                .frame(minWidth: 1024, minHeight: 800)
         }
         .modelContainer(sharedModelContainer)
         .windowResizability(.contentSize)
@@ -49,11 +48,7 @@ struct experiments_macosApp: App {
 }
 
 @MainActor
-class Server: ObservableObject {
-    @Published var isRunning: Bool = false
-    @Published var ipAddress: String = "Unknown"
-    @Published var port: Int = 8080
-    
+class Server {
     private var app: Application?
 
     func start() async {
@@ -65,7 +60,7 @@ class Server: ObservableObject {
             self.app = app
             try configure(app)
             app.http.server.configuration.port = 8080
-            self.port = app.http.server.configuration.port
+            DataViewModel.sharedSingleton.port = app.http.server.configuration.port
             app.http.server.configuration.hostname = "192.168.0.3"
             
             // This must be called on the main thread
@@ -73,18 +68,18 @@ class Server: ObservableObject {
             app.logger.debug("Running with \(executorTakeoverSuccess ? "SwiftNIO" : "standard") Swift Concurrency default executor")
             
             try await app.startup()
-            self.isRunning = true
+            DataViewModel.sharedSingleton.isRunning = true
             
-            self.ipAddress = app.http.server.configuration.hostname
+            DataViewModel.sharedSingleton.ipAddress = app.http.server.configuration.hostname
         } catch {
             print("Failed to start server: \(error)")
-            self.isRunning = false
+            DataViewModel.sharedSingleton.isRunning = false
         }
     }
 
     func stop() {
         app?.shutdown()
-        self.isRunning = false
+        DataViewModel.sharedSingleton.isRunning = false
     }
 
     private func configure(_ app: Application) throws {
