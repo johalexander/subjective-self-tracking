@@ -15,7 +15,7 @@ func routes(_ app: Application) throws {
     }
 }
 
-struct SensorReading: Content {
+struct SensorReading: Content, Codable {
     var timestamp: TimeInterval
     var duration: Int
     var stability: String

@@ -46,6 +46,9 @@ struct Settings: View {
                                 Text("Participant data is generated when experiments are completed.")
                                     .font(.footnote)
                                 Spacer()
+                                Button(action: refresh) {
+                                    Label("Refresh", systemImage: "arrow.clockwise")
+                                }
                                 Button(action: export) {
                                     Label("Export", systemImage: "square.and.arrow.up")
                                 }
@@ -53,7 +56,7 @@ struct Settings: View {
                             
                             Divider()
                             Table(vm.participants) {
-                                TableColumn("Id", value: \.id.uuidString)
+                                TableColumn("Id", value: \.id)
                                 TableColumn("Age", value: \.ageString)
                                 TableColumn("Gender identity", value: \.genderIdentity)
                                 TableColumn("Completed experiments", value: \.count)
@@ -74,7 +77,11 @@ struct Settings: View {
     }
     
     func export() {
-        
+        vm.loadParticipantData()
+    }
+    
+    func refresh() {
+        vm.loadParticipantData()
     }
 }
 

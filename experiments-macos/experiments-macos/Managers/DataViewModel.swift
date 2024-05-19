@@ -21,17 +21,33 @@ class DataViewModel: ObservableObject {
         Item(title: "Settings", imageName: "⚙️"),
     ]
     
-    @Published var participants = [
-        Participant(age: 20, genderIdentity: "Male", completedExperiments: []),
-        Participant(age: 25, genderIdentity: "Male", completedExperiments: []),
-        Participant(age: 32, genderIdentity: "Male", completedExperiments: []),
-        Participant(age: 24, genderIdentity: "Male", completedExperiments: []),
-    ]
+    @Published var participants: [Participant] = []
     
     private var colorRepository = Greyscales()
     private var numberRepository = Numbers()
     
     static let sharedSingleton = DataViewModel()
+    
+    private let dataDirectory: URL
+    
+    init() {
+        dataDirectory = FileManager.default.homeDirectoryForCurrentUser
+        loadParticipantData()
+    }
+    
+    func loadParticipantData() {
+        do {
+            let fileURLs = try FileManager.default.contentsOfDirectory(at: dataDirectory, includingPropertiesForKeys: nil)
+                .filter { $0.pathExtension == "json" }
+            let decoder = JSONDecoder()
+            participants = try fileURLs.compactMap { url in
+                let data = try Data(contentsOf: url)
+                return try decoder.decode(Participant.self, from: data)
+            }
+        } catch {
+            print("Error loading participant data: \(error)")
+        }
+    }
     
     func getColor() -> Color {
         return self.colorRepository.currentColor ?? .white

@@ -7,10 +7,12 @@
 
 import Foundation
 
-struct Participant: Identifiable {
-    let id = UUID()
-    let age: Int
+struct Participant: Identifiable, Codable {
+    var id: String
+    let age: String
     let genderIdentity: String
+    let email: String
+    let questionnaireOptIn: Bool
     
     var completedExperiments: [Experiment]
     
@@ -21,4 +23,13 @@ struct Participant: Identifiable {
     var count: String {
         return String(completedExperiments.count)
     }
+}
+
+enum Gender: String, CaseIterable, Identifiable {
+    case male
+    case female
+    case nonbinary
+    case undisclosed
+    
+    var id: Self { self }
 }

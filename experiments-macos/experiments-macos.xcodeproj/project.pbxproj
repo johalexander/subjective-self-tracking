@@ -27,6 +27,15 @@
 		5CD3DA652BF9333C00B794FF /* Greyscales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA642BF9333C00B794FF /* Greyscales.swift */; };
 		5CD3DA672BF942CB00B794FF /* Numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA662BF942CB00B794FF /* Numbers.swift */; };
 		5CD3DA692BF963FB00B794FF /* DataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA682BF963FB00B794FF /* DataViewModel.swift */; };
+		5CD3DA6F2BF9ACCA00B794FF /* ExperimentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA6E2BF9ACC900B794FF /* ExperimentViewModel.swift */; };
+		5CD3DA712BF9AE9C00B794FF /* LatinSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA702BF9AE9C00B794FF /* LatinSquare.swift */; };
+		5CD3DA742BF9B12900B794FF /* ExperimentSliderGreyscaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA732BF9B12900B794FF /* ExperimentSliderGreyscaleView.swift */; };
+		5CD3DA762BF9B79F00B794FF /* ThankYou.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA752BF9B79F00B794FF /* ThankYou.swift */; };
+		5CD3DA782BF9BEE900B794FF /* ExperimentSliderNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA772BF9BEE900B794FF /* ExperimentSliderNumberView.swift */; };
+		5CD3DA7A2BF9BF5F00B794FF /* ExperimentGesturePitchGreyscaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA792BF9BF5F00B794FF /* ExperimentGesturePitchGreyscaleView.swift */; };
+		5CD3DA7C2BF9BFAA00B794FF /* ExperimentGesturePitchNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA7B2BF9BFAA00B794FF /* ExperimentGesturePitchNumberView.swift */; };
+		5CD3DA7E2BF9BFF400B794FF /* ExperimentGestureRollGreyscaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA7D2BF9BFF400B794FF /* ExperimentGestureRollGreyscaleView.swift */; };
+		5CD3DA802BF9C00800B794FF /* ExperimentGestureRollNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA7F2BF9C00800B794FF /* ExperimentGestureRollNumberView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +60,15 @@
 		5CD3DA642BF9333C00B794FF /* Greyscales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Greyscales.swift; sourceTree = "<group>"; };
 		5CD3DA662BF942CB00B794FF /* Numbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Numbers.swift; sourceTree = "<group>"; };
 		5CD3DA682BF963FB00B794FF /* DataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewModel.swift; sourceTree = "<group>"; };
+		5CD3DA6E2BF9ACC900B794FF /* ExperimentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentViewModel.swift; sourceTree = "<group>"; };
+		5CD3DA702BF9AE9C00B794FF /* LatinSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatinSquare.swift; sourceTree = "<group>"; };
+		5CD3DA732BF9B12900B794FF /* ExperimentSliderGreyscaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentSliderGreyscaleView.swift; sourceTree = "<group>"; };
+		5CD3DA752BF9B79F00B794FF /* ThankYou.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThankYou.swift; sourceTree = "<group>"; };
+		5CD3DA772BF9BEE900B794FF /* ExperimentSliderNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentSliderNumberView.swift; sourceTree = "<group>"; };
+		5CD3DA792BF9BF5F00B794FF /* ExperimentGesturePitchGreyscaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentGesturePitchGreyscaleView.swift; sourceTree = "<group>"; };
+		5CD3DA7B2BF9BFAA00B794FF /* ExperimentGesturePitchNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentGesturePitchNumberView.swift; sourceTree = "<group>"; };
+		5CD3DA7D2BF9BFF400B794FF /* ExperimentGestureRollGreyscaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentGestureRollGreyscaleView.swift; sourceTree = "<group>"; };
+		5CD3DA7F2BF9C00800B794FF /* ExperimentGestureRollNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentGestureRollNumberView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +125,8 @@
 		5CD3DA6A2BF9767400B794FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5CD3DA722BF9AF0600B794FF /* Experiments */,
 				5CD3DA6D2BF976CB00B794FF /* UI */,
-				5CD3DA4C2BF8339600B794FF /* Experiments.swift */,
 				5CD3DA4E2BF8339C00B794FF /* Settings.swift */,
 				5CD3DA332BF8097300B794FF /* ContentView.swift */,
 				5CD3DA462BF8198200B794FF /* NavigationList.swift */,
@@ -124,6 +142,8 @@
 				5CD3DA682BF963FB00B794FF /* DataViewModel.swift */,
 				5CD3DA642BF9333C00B794FF /* Greyscales.swift */,
 				5CD3DA662BF942CB00B794FF /* Numbers.swift */,
+				5CD3DA6E2BF9ACC900B794FF /* ExperimentViewModel.swift */,
+				5CD3DA702BF9AE9C00B794FF /* LatinSquare.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -146,6 +166,21 @@
 				5CD3DA602BF8FA4F00B794FF /* SquareImage.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		5CD3DA722BF9AF0600B794FF /* Experiments */ = {
+			isa = PBXGroup;
+			children = (
+				5CD3DA4C2BF8339600B794FF /* Experiments.swift */,
+				5CD3DA732BF9B12900B794FF /* ExperimentSliderGreyscaleView.swift */,
+				5CD3DA7B2BF9BFAA00B794FF /* ExperimentGesturePitchNumberView.swift */,
+				5CD3DA792BF9BF5F00B794FF /* ExperimentGesturePitchGreyscaleView.swift */,
+				5CD3DA772BF9BEE900B794FF /* ExperimentSliderNumberView.swift */,
+				5CD3DA7D2BF9BFF400B794FF /* ExperimentGestureRollGreyscaleView.swift */,
+				5CD3DA7F2BF9C00800B794FF /* ExperimentGestureRollNumberView.swift */,
+				5CD3DA752BF9B79F00B794FF /* ThankYou.swift */,
+			);
+			path = Experiments;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,18 +262,27 @@
 				5CD3DA612BF8FA4F00B794FF /* SquareImage.swift in Sources */,
 				5CD3DA5D2BF8DBF600B794FF /* Experiment.swift in Sources */,
 				5CD3DA592BF839CE00B794FF /* Server.swift in Sources */,
+				5CD3DA6F2BF9ACCA00B794FF /* ExperimentViewModel.swift in Sources */,
+				5CD3DA712BF9AE9C00B794FF /* LatinSquare.swift in Sources */,
+				5CD3DA7C2BF9BFAA00B794FF /* ExperimentGesturePitchNumberView.swift in Sources */,
 				5CD3DA632BF92D0500B794FF /* Practice.swift in Sources */,
 				5CD3DA4D2BF8339600B794FF /* Experiments.swift in Sources */,
 				5CD3DA5F2BF8E77C00B794FF /* CircleImage.swift in Sources */,
 				5CD3DA342BF8097300B794FF /* ContentView.swift in Sources */,
+				5CD3DA742BF9B12900B794FF /* ExperimentSliderGreyscaleView.swift in Sources */,
 				5CD3DA492BF822C200B794FF /* Learn.swift in Sources */,
 				5CD3DA362BF8097300B794FF /* Item.swift in Sources */,
 				5CD3DA672BF942CB00B794FF /* Numbers.swift in Sources */,
+				5CD3DA7E2BF9BFF400B794FF /* ExperimentGestureRollGreyscaleView.swift in Sources */,
 				5CD3DA432BF80F2B00B794FF /* NavigationItem.swift in Sources */,
 				5CD3DA5B2BF8DB7700B794FF /* Participant.swift in Sources */,
+				5CD3DA7A2BF9BF5F00B794FF /* ExperimentGesturePitchGreyscaleView.swift in Sources */,
 				5CD3DA692BF963FB00B794FF /* DataViewModel.swift in Sources */,
+				5CD3DA802BF9C00800B794FF /* ExperimentGestureRollNumberView.swift in Sources */,
+				5CD3DA782BF9BEE900B794FF /* ExperimentSliderNumberView.swift in Sources */,
 				5CD3DA4F2BF8339C00B794FF /* Settings.swift in Sources */,
 				5CD3DA652BF9333C00B794FF /* Greyscales.swift in Sources */,
+				5CD3DA762BF9B79F00B794FF /* ThankYou.swift in Sources */,
 				5CD3DA322BF8097300B794FF /* SubjectiveSelfTrackingApp.swift in Sources */,
 				5CD3DA472BF8198200B794FF /* NavigationList.swift in Sources */,
 			);

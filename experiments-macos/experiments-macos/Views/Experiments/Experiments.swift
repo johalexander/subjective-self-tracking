@@ -8,24 +8,47 @@
 import Foundation
 import SwiftUI
 
+struct ExperimentView: View {
+    @ObservedObject var vm: ExperimentViewModel
+
+    var body: some View {
+        VStack {
+            if vm.currentExperimentIndex < vm.experimentOrder.count {
+                switch vm.experimentOrder[vm.currentExperimentIndex] {
+                case .sliderGreyscale:
+                    ExperimentSliderGreyscaleView(vm: vm)
+                case .sliderNumber:
+                    ExperimentSliderNumberView(vm: vm)
+                case .gesturePitchGreyscale:
+                    ExperimentGesturePitchGreyscaleView(vm: vm)
+                case .gesturePitchNumber:
+                    ExperimentGesturePitchNumberView(vm: vm)
+                case .gestureRollGreyscale:
+                    ExperimentGestureRollGreyscaleView(vm: vm)
+                case .gestureRollNumber:
+                    ExperimentGestureRollNumberView(vm: vm)
+                }
+            } else {
+                ThankYou(vm: vm)
+            }
+        }
+        .navigationBarBackButtonHidden()
+        .onAppear {
+            saveParticipantCount(vm.participantNumber)
+        }
+    }
+}
+
 struct Experiments: View {
     @EnvironmentObject var vm: DataViewModel
     
+    @State private var participantNumber: Int = readParticipantCount() + 1
     @State private var age: String = ""
     @State private var genderIdentity: Gender = Gender.undisclosed
     @State private var email: String = ""
     @State private var sendQuestionnaire: Bool = false
     
     @State private var enabled = false
-    
-    private var numberFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .none
-        formatter.allowsFloats = false
-        formatter.minimum = 0
-        formatter.maximum = 100
-        return formatter
-    }
 
     let experiments = [
         "Experiment 1: Slider - Greyscale",
@@ -35,21 +58,12 @@ struct Experiments: View {
         "Experiment 5: Gesture: Roll - Greyscale",
         "Experiment 6: Gesture: Roll - Number"
     ]
-    
-    enum Gender: String, CaseIterable, Identifiable {
-        case male
-        case female
-        case nonbinary
-        case undisclosed
-        
-        var id: Self { self }
-    }
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading) {
-                    Text("Welcome to the Experiments")
+                    Text("Welcome to the Experiments 🧑‍🔬")
                         .font(.largeTitle)
                         .padding(.top)
                     
@@ -79,7 +93,7 @@ struct Experiments: View {
                         Text("Please enter your details:")
                             .font(.body)
                         
-                        TextField("Age", value: $age, formatter: numberFormatter)
+                        TextField("Age (required)", text: $age)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .help("Please enter your age")
                         
@@ -125,13 +139,12 @@ struct Experiments: View {
                             }
                         }
                         
-                        Button(action: {
-                            
-                        }) {
+                        NavigationLink(destination: ExperimentView(vm: ExperimentViewModel(participantNumber: participantNumber)
+                            .setup(id: String(participantNumber), age: age, genderIdentity: genderIdentity.rawValue, email: email, sendQuestionnaire: sendQuestionnaire))) {
                             Text("Start experiments")
                         }
                         .buttonStyle(.borderedProminent)
-                        .disabled(!enabled)
+                        .disabled(!enabled || age.isEmpty)
                         .onChange(of: vm.receivedData, { oldValue, newValue in
                             if !oldValue && newValue {
                                 enableStart()
@@ -139,6 +152,7 @@ struct Experiments: View {
                         })
                     }
                     .animation(.easeIn, value: enabled)
+                    .animation(.easeIn, value: age)
                 }
                 .padding()
             }
