@@ -33,6 +33,7 @@ struct NavigationList: View {
                 let item2 = vm.navItems[1]
                 NavigationLink {
                     Experiments()
+                        .environmentObject(vm)
                 } label: {
                     NavigationItem(item: item2)
                 }
