@@ -10,7 +10,6 @@ import SwiftUI
 
 struct Practice: View {
     @EnvironmentObject var vm: DataViewModel
-    var item: Item
     
     @State private var input: Double = 0
     
@@ -26,10 +25,6 @@ struct Practice: View {
     @State private var selectedColor: Color = DataViewModel.sharedSingleton.getColor()
     @State private var selectedNumber: String = DataViewModel.sharedSingleton.getNumber()
     
-    var title: String {
-        return (item.imageName) + " " + (item.title)
-    }
-
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -202,7 +197,7 @@ struct Practice: View {
                 }
             })
         }
-        .navigationTitle(title)
+        .navigationTitle("💪🏻 Practice")
     }
     
     func consume() {
@@ -215,6 +210,6 @@ struct Practice: View {
 }
 
 #Preview {
-    Practice(item: Item(title: "Practice", imageName: "💪🏻"))
+    Practice()
         .environmentObject(DataViewModel())
 }

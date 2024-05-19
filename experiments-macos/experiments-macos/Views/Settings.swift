@@ -9,11 +9,6 @@ import SwiftUI
 
 struct Settings: View {
     @EnvironmentObject var vm: DataViewModel
-    var item: Item
-    
-    var title: String {
-        return (item.imageName) + " " + (item.title)
-    }
 
     var body: some View {
         NavigationStack {
@@ -74,7 +69,7 @@ struct Settings: View {
                 .padding()
             }
         }
-        .navigationTitle(title)
+        .navigationTitle("⚙️ Settings")
         .frame(alignment: .top)
     }
     
@@ -85,6 +80,6 @@ struct Settings: View {
 
 
 #Preview {
-    Settings(item: Item(title: "Settings", imageName: "⚙️"))
+    Settings()
         .environmentObject(DataViewModel())
 }

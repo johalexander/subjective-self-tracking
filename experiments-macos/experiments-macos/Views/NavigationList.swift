@@ -23,7 +23,7 @@ struct NavigationList: View {
             List(selection: $selectedItem) {
                 let item = vm.navItems[0]
                 NavigationLink {
-                    Learn(item: item)
+                    Learn()
                         .environmentObject(vm)
                 } label: {
                     NavigationItem(item: item)
@@ -32,7 +32,7 @@ struct NavigationList: View {
                 
                 let item2 = vm.navItems[1]
                 NavigationLink {
-                    Experiments(item: item2)
+                    Experiments()
                 } label: {
                     NavigationItem(item: item2)
                 }
@@ -40,7 +40,7 @@ struct NavigationList: View {
                 
                 let item3 = vm.navItems[2]
                 NavigationLink {
-                    Settings(item: item3)
+                    Settings()
                         .environmentObject(vm)
                 } label: {
                     NavigationItem(item: item3)

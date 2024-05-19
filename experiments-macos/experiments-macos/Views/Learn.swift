@@ -10,11 +10,6 @@ import SwiftUI
 
 struct Learn: View {
     @EnvironmentObject var vm: DataViewModel
-    var item: Item
-    
-    var title: String {
-        return (item.imageName) + " " + (item.title)
-    }
 
     var body: some View {
         NavigationStack {
@@ -134,24 +129,24 @@ struct Learn: View {
                     HStack {
                         Spacer()
                         NavigationLink {
-                            Practice(item: item)
+                            Practice()
                                 .environmentObject(vm)
                         } label: {
                             Text("Let's try it out!")
                         }
                         .buttonStyle(.borderedProminent)
-                        .navigationTitle(title)
+                        .navigationTitle("💪🏻 Learn")
                         Spacer()
                     }
                 }
                 .padding()
             }
         }
-        .navigationTitle(title)
+        .navigationTitle("💪🏻 Learn")
     }
 }
 
 #Preview {
-    Learn(item: Item(title: "Learn", imageName: "💪🏻"))
+    Learn()
         .environmentObject(DataViewModel())
 }

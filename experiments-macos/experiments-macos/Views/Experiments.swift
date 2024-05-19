@@ -9,26 +9,19 @@ import Foundation
 import SwiftUI
 
 struct Experiments: View {
-    var item: Item
-    
-    var title: String {
-        return (item.imageName) + " " + (item.title)
-    }
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                Text("Hey")
-                
-                NavigationLink("ONE") {
-                    Text("ONE one level deeper")
+                VStack(alignment: .leading) {
+                    
                 }
             }
         }
-        .navigationTitle(title)
+        .navigationTitle("🧪 Experiments")
     }
 }
 
 #Preview {
-    Experiments(item: Item(title: "Learn", imageName: "💪🏻"))
+    Experiments()
 }
