@@ -5,6 +5,7 @@ import sync_time
 import battery_reading
 import on_disk_storage
 import bno_initializer
+import backend
 from adafruit_debouncer import Debouncer
 
 button_pin = digitalio.DigitalInOut(board.D13)
@@ -21,6 +22,36 @@ bno = bno_initializer.init()
 
 last_write_time = time.monotonic()
 write_interval = 180
+
+
+def process_data(
+    timestamp,
+    duration,
+    stability,
+    activity,
+    activity_confidence,
+    calibration_status,
+    quaternion,
+):
+    on_disk_storage.add_to_queue(
+        timestamp,
+        duration,
+        stability,
+        activity,
+        activity_confidence,
+        calibration_status,
+        *quaternion,
+    )
+
+    backend.send_data(
+        timestamp,
+        duration,
+        stability,
+        activity,
+        activity_confidence,
+        calibration_status,
+        *quaternion,
+    )
 
 
 while True:
@@ -44,14 +75,14 @@ while True:
         motor_pin.value = False
         duration = int(button.last_duration * 1e3)
 
-        on_disk_storage.add_to_queue(
+        process_data(
             timestamp,
             duration,
             stability,
             activity,
             activity_confidence,
             calibration_status,
-            *quaternion,
+            quaternion,
         )
 
     if time.monotonic() - last_write_time > write_interval and button.value:
