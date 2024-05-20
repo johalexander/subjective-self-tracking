@@ -161,12 +161,22 @@ struct Practice: View {
                             
                             ZStack {
                                 if vm.receivedData {
-                                    HStack(spacing: 10) {
-                                        Image(systemName: "checkmark.circle")
-                                            .resizable()
-                                            .frame(width: 30, height: 30)
-                                            .foregroundColor(.green)
-                                        Text("Input received!")
+                                    if vm.sufficientCalibration {
+                                        HStack(spacing: 10) {
+                                            Image(systemName: "checkmark.circle")
+                                                .resizable()
+                                                .frame(width: 30, height: 30)
+                                                .foregroundColor(.green)
+                                            Text("Input received!")
+                                        }
+                                    } else {
+                                        HStack(spacing: 10) {
+                                            Image(systemName: "exclamationmark.triangle")
+                                                .resizable()
+                                                .frame(width: 30, height: 30)
+                                                .foregroundColor(.yellow)
+                                            Text("Please repeat the input for this stimuli (low calibration)")
+                                        }
                                     }
                                 } else {
                                     HStack(spacing: 10) {
@@ -192,7 +202,7 @@ struct Practice: View {
             }
             .padding()
             .onChange(of: vm.receivedData, { oldValue, newValue in
-                if oldValue && !newValue {
+                if oldValue && !newValue && vm.sufficientCalibration {
                     consume()
                 }
             })

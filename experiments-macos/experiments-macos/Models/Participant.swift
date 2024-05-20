@@ -16,12 +16,12 @@ struct Participant: Identifiable, Codable {
     
     var completedExperiments: [Experiment]
     
-    var ageString: String {
-        return String(age)
+    var totalExperimentCount: String {
+        return String(completedExperiments.count)
     }
     
-    var count: String {
-        return String(completedExperiments.count)
+    var totalStimuliCount: String {
+        return String(completedExperiments.reduce(0) { $0 + $1.stimuliEntry.count })
     }
 }
 

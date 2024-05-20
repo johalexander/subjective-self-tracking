@@ -139,17 +139,38 @@ struct Experiments: View {
                             .padding(.bottom)
                         
                         if !enabled {
-                            Text("Click the device button once to unlock the experiments.")
+                            Text("Click the device button to unlock the experiments.")
                                 .font(.subheadline)
                                 .padding(.bottom)
                         }
                     }
+                    .animation(.easeIn, value: enabled)
                     
                     VStack(alignment: .leading, spacing: 15) {
                         if !enabled {
-                            HStack(spacing: 10) {
-                                ProgressView()
-                                Text("Awaiting input from device...")
+                            if vm.receivedData {
+                                if vm.sufficientCalibration {
+                                    HStack(spacing: 10) {
+                                        Image(systemName: "checkmark.circle")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .foregroundColor(.green)
+                                        Text("Input received!")
+                                    }
+                                } else {
+                                    HStack(spacing: 10) {
+                                        Image(systemName: "exclamationmark.triangle")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .foregroundColor(.yellow)
+                                        Text("Please repeat the input (low calibration)")
+                                    }
+                                }
+                            } else {
+                                HStack(spacing: 10) {
+                                    ProgressView()
+                                    Text("Awaiting input from device...")
+                                }
                             }
                         }
                         
@@ -160,8 +181,10 @@ struct Experiments: View {
                         .buttonStyle(.borderedProminent)
                         .disabled(!enabled || age.isEmpty)
                         .onChange(of: vm.receivedData, { oldValue, newValue in
-                            if !oldValue && newValue {
-                                enableStart()
+                            if !oldValue && newValue && vm.sufficientCalibration {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
+                                    enabled = true
+                                }
                             }
                         })
                     }
@@ -172,10 +195,6 @@ struct Experiments: View {
             }
         }
         .navigationTitle("🧪 Experiments")
-    }
-    
-    func enableStart() {
-        enabled = true
     }
 }
 

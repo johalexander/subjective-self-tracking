@@ -51,7 +51,8 @@ func routes(_ app: Application) throws {
         print("Received data: \(data)")
         saveDataToFile(data)
         
-        DataViewModel.sharedSingleton.markDataReceived()
+        let sufficientCalibration = data.calibration_status >= 2
+        DataViewModel.sharedSingleton.markDataReceived(data: data, sufficientCalibration: sufficientCalibration)
         
         return .ok
     }
