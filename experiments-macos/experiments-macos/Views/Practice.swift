@@ -171,7 +171,7 @@ struct Practice: View {
                                 } else {
                                     HStack(spacing: 10) {
                                         ProgressView()
-                                        Text("Awaiting input...")
+                                        Text("Awaiting input from device...")
                                     }
                                 }
                             }

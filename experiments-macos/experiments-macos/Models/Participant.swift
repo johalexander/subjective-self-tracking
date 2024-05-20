@@ -28,7 +28,7 @@ struct Participant: Identifiable, Codable {
 enum Gender: String, CaseIterable, Identifiable {
     case male
     case female
-    case nonbinary
+    case other
     case undisclosed
     
     var id: Self { self }
