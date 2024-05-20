@@ -131,7 +131,7 @@ struct Experiments: View {
                         Text("Before starting please make sure that the device is powered (lights on).")
                             .font(.headline)
                         
-                        Text("Make sure to only click once per stimuli.")
+                        Text("Make sure to only click once per stimuli. You may be asked to repeat the input for a stimuli.")
                             .font(.headline)
                         
                         Text("Please be gentle with the device.")
