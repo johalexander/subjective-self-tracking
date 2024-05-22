@@ -13,7 +13,8 @@ struct NavigationItem: View {
     
     var body: some View {
         HStack {
-            item.image
+            Text(item.imageName)
+                    .font(.system(size: 30))
             
             VStack(alignment: .leading) {
                 Text(item.title)
@@ -23,6 +24,16 @@ struct NavigationItem: View {
             Spacer()
         }
         .padding(.vertical, 4)
+    }
+}
+
+struct Item: Hashable {
+    var title: String
+    var imageName: String
+    
+    init(title: String, imageName: String) {
+        self.title = title
+        self.imageName = imageName
     }
 }
 

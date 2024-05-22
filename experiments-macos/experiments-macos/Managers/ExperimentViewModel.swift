@@ -7,8 +7,8 @@ class ExperimentViewModel: ObservableObject {
     @Published var id: String = ""
     @Published var age: String = ""
     @Published var genderIdentity: String = ""
-    @Published var email: String = ""
-    @Published var sendQuestionnaire: Bool = false
+    @Published var startedDate: Date = Date.now
+    @Published var endedDate: Date = Date.now
 
     private let latinSquare: [[Int]]
     let participantNumber: Int
@@ -38,6 +38,7 @@ class ExperimentViewModel: ObservableObject {
     }
 
     func saveData() {
+        self.endedDate = Date.now
         let data = Participant(id: id, age: age, genderIdentity: genderIdentity, completedExperiments: experiments)
 
         let encoder = JSONEncoder()
@@ -54,6 +55,7 @@ extension ExperimentViewModel {
         self.id = id
         self.age = age
         self.genderIdentity = genderIdentity
+        self.startedDate = Date.now
         return self
     }
 }

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5CD3DA322BF8097300B794FF /* SubjectiveSelfTrackingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA312BF8097300B794FF /* SubjectiveSelfTrackingApp.swift */; };
 		5CD3DA342BF8097300B794FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA332BF8097300B794FF /* ContentView.swift */; };
-		5CD3DA362BF8097300B794FF /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA352BF8097300B794FF /* Item.swift */; };
 		5CD3DA382BF8097500B794FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CD3DA372BF8097500B794FF /* Assets.xcassets */; };
 		5CD3DA3B2BF8097500B794FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CD3DA3A2BF8097500B794FF /* Preview Assets.xcassets */; };
 		5CD3DA432BF80F2B00B794FF /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA422BF80F2B00B794FF /* NavigationItem.swift */; };
@@ -42,7 +41,6 @@
 		5CD3DA2E2BF8097300B794FF /* Subjective Self Tracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Subjective Self Tracking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CD3DA312BF8097300B794FF /* SubjectiveSelfTrackingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectiveSelfTrackingApp.swift; sourceTree = "<group>"; };
 		5CD3DA332BF8097300B794FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		5CD3DA352BF8097300B794FF /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		5CD3DA372BF8097500B794FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CD3DA3A2BF8097500B794FF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5CD3DA3C2BF8097500B794FF /* experiments_macos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = experiments_macos.entitlements; sourceTree = "<group>"; };
@@ -127,11 +125,11 @@
 			children = (
 				5CD3DA722BF9AF0600B794FF /* Experiments */,
 				5CD3DA6D2BF976CB00B794FF /* UI */,
-				5CD3DA4E2BF8339C00B794FF /* Settings.swift */,
-				5CD3DA332BF8097300B794FF /* ContentView.swift */,
-				5CD3DA462BF8198200B794FF /* NavigationList.swift */,
 				5CD3DA482BF822C200B794FF /* Learn.swift */,
 				5CD3DA622BF92D0400B794FF /* Practice.swift */,
+				5CD3DA332BF8097300B794FF /* ContentView.swift */,
+				5CD3DA462BF8198200B794FF /* NavigationList.swift */,
+				5CD3DA4E2BF8339C00B794FF /* Settings.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -140,9 +138,9 @@
 			isa = PBXGroup;
 			children = (
 				5CD3DA682BF963FB00B794FF /* DataViewModel.swift */,
+				5CD3DA6E2BF9ACC900B794FF /* ExperimentViewModel.swift */,
 				5CD3DA642BF9333C00B794FF /* Greyscales.swift */,
 				5CD3DA662BF942CB00B794FF /* Numbers.swift */,
-				5CD3DA6E2BF9ACC900B794FF /* ExperimentViewModel.swift */,
 				5CD3DA702BF9AE9C00B794FF /* LatinSquare.swift */,
 			);
 			path = Managers;
@@ -151,7 +149,6 @@
 		5CD3DA6C2BF9769800B794FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5CD3DA352BF8097300B794FF /* Item.swift */,
 				5CD3DA5A2BF8DB7700B794FF /* Participant.swift */,
 				5CD3DA5C2BF8DBF600B794FF /* Experiment.swift */,
 			);
@@ -172,12 +169,12 @@
 			isa = PBXGroup;
 			children = (
 				5CD3DA4C2BF8339600B794FF /* Experiments.swift */,
+				5CD3DA772BF9BEE900B794FF /* ExperimentSliderNumberView.swift */,
 				5CD3DA732BF9B12900B794FF /* ExperimentSliderGreyscaleView.swift */,
 				5CD3DA7B2BF9BFAA00B794FF /* ExperimentGesturePitchNumberView.swift */,
 				5CD3DA792BF9BF5F00B794FF /* ExperimentGesturePitchGreyscaleView.swift */,
-				5CD3DA772BF9BEE900B794FF /* ExperimentSliderNumberView.swift */,
-				5CD3DA7D2BF9BFF400B794FF /* ExperimentGestureRollGreyscaleView.swift */,
 				5CD3DA7F2BF9C00800B794FF /* ExperimentGestureRollNumberView.swift */,
+				5CD3DA7D2BF9BFF400B794FF /* ExperimentGestureRollGreyscaleView.swift */,
 				5CD3DA752BF9B79F00B794FF /* ThankYou.swift */,
 			);
 			path = Experiments;
@@ -271,7 +268,6 @@
 				5CD3DA342BF8097300B794FF /* ContentView.swift in Sources */,
 				5CD3DA742BF9B12900B794FF /* ExperimentSliderGreyscaleView.swift in Sources */,
 				5CD3DA492BF822C200B794FF /* Learn.swift in Sources */,
-				5CD3DA362BF8097300B794FF /* Item.swift in Sources */,
 				5CD3DA672BF942CB00B794FF /* Numbers.swift in Sources */,
 				5CD3DA7E2BF9BFF400B794FF /* ExperimentGestureRollGreyscaleView.swift in Sources */,
 				5CD3DA432BF80F2B00B794FF /* NavigationItem.swift in Sources */,

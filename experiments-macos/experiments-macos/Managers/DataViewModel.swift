@@ -121,11 +121,23 @@ class DataViewModel: ObservableObject {
     }
     
     func getColor() -> Color {
-        return self.colorRepository.currentColor ?? .white
+        return self.colorRepository.currentColor?.color ?? .white
+    }
+    
+    func getTrialColor() -> Color {
+        return self.colorRepository.currentTrialColor?.color ?? .white
+    }
+    
+    func getColorId() -> Int {
+        return self.colorRepository.currentColor?.id ?? 0
     }
     
     func getNumber() -> String {
         return self.numberRepository.currentNumber
+    }
+    
+    func getTrialNumber() -> String {
+        return self.numberRepository.currentTrialNumber
     }
 
     func markDataReceived(data: SensorReading, sufficientCalibration: Bool) {
@@ -150,6 +162,35 @@ class DataViewModel: ObservableObject {
             self.colorRepository.consume()
             self.numberRepository.consume()
         }
+    }
+    
+    func consumeColor() {
+        DispatchQueue.main.async {
+            self.colorRepository.consume()
+        }
+    }
+    
+    func consumeTrialColor() {
+        DispatchQueue.main.async {
+            self.colorRepository.consumeTrial()
+        }
+    }
+    
+    func consumeNumber() {
+        DispatchQueue.main.async {
+            self.numberRepository.consume()
+        }
+    }
+    
+    func consumeTrialNumber() {
+        DispatchQueue.main.async {
+            self.numberRepository.consumeTrial()
+        }
+    }
+    
+    func shuffleStimuli() {
+        self.colorRepository = Greyscales()
+        self.numberRepository = Numbers()
     }
 }
 

@@ -9,32 +9,34 @@ import Foundation
 import SwiftUI
 
 struct ExperimentView: View {
-    @ObservedObject var vm: ExperimentViewModel
+    @ObservedObject var experiments: ExperimentViewModel
+    @ObservedObject var data: DataViewModel
 
     var body: some View {
         VStack {
-            if vm.currentExperimentIndex < vm.experimentOrder.count {
-                switch vm.experimentOrder[vm.currentExperimentIndex] {
+            if experiments.currentExperimentIndex < experiments.experimentOrder.count {
+                switch experiments.experimentOrder[experiments.currentExperimentIndex] {
                 case .sliderGreyscale:
-                    ExperimentSliderGreyscaleView(vm: vm)
+                    ExperimentSliderGreyscaleView(experiments: experiments, data: data)
                 case .sliderNumber:
-                    ExperimentSliderNumberView(vm: vm)
+                    ExperimentSliderNumberView(experiments: experiments, data: data)
                 case .gesturePitchGreyscale:
-                    ExperimentGesturePitchGreyscaleView(vm: vm)
+                    ExperimentGesturePitchGreyscaleView(experiments: experiments, data: data)
                 case .gesturePitchNumber:
-                    ExperimentGesturePitchNumberView(vm: vm)
+                    ExperimentGesturePitchNumberView(experiments: experiments, data: data)
                 case .gestureRollGreyscale:
-                    ExperimentGestureRollGreyscaleView(vm: vm)
+                    ExperimentGestureRollGreyscaleView(experiments: experiments, data: data)
                 case .gestureRollNumber:
-                    ExperimentGestureRollNumberView(vm: vm)
+                    ExperimentGestureRollNumberView(experiments: experiments, data: data)
                 }
             } else {
-                ThankYou(vm: vm)
+                ThankYou(vm: experiments)
             }
         }
         .navigationBarBackButtonHidden()
         .onAppear {
-            saveParticipantCount(vm.participantNumber)
+            saveParticipantCount(experiments.participantNumber)
+            data.shuffleStimuli()
         }
     }
 }
@@ -45,8 +47,6 @@ struct Experiments: View {
     @State private var participantNumber: Int = readParticipantCount() + 1
     @State private var age: String = ""
     @State private var genderIdentity: Gender = Gender.undisclosed
-    @State private var email: String = ""
-    @State private var sendQuestionnaire: Bool = false
     
     @State private var enabled = false
 
@@ -162,8 +162,8 @@ struct Experiments: View {
                             }
                         }
                         
-                        NavigationLink(destination: ExperimentView(vm: ExperimentViewModel(participantNumber: participantNumber)
-                            .setup(id: String(participantNumber), age: age, genderIdentity: genderIdentity.rawValue))) {
+                        NavigationLink(destination: ExperimentView(experiments: ExperimentViewModel(participantNumber: participantNumber)
+                            .setup(id: String(participantNumber), age: age, genderIdentity: genderIdentity.rawValue), data: vm)) {
                             Text("Start experiments")
                         }
                         .buttonStyle(.borderedProminent)

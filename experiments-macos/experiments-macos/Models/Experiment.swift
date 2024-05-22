@@ -9,9 +9,11 @@ import Foundation
 
 struct Experiment: Identifiable, Codable {
     let id: String
-    let experimentType: ExperimentType
+    let experimentType: String
     var successfulStimuli: [Stimuli]
     var failedStimuli: [Stimuli]
+    var startedDate: Date
+    var endedDate: Date
 }
 
 struct Stimuli: Identifiable, Codable {

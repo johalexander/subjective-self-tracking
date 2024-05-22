@@ -11,7 +11,7 @@ import SwiftUI
 struct Practice: View {
     @EnvironmentObject var vm: DataViewModel
     
-    @State private var input: Double = 0
+    @State private var input: Double = 0.0
     
     @State private var selectedStimuli = "Greyscale"
     var stimuli = ["Greyscale", "Number"]
@@ -21,8 +21,6 @@ struct Practice: View {
     
     @State private var selectedMovement = "Pitch"
     var movements = ["Pitch", "Roll"]
-    
-    @State private var transitionColor: Color = .clear
     
     @State private var transitionOpacity: Double = 1.0
     
