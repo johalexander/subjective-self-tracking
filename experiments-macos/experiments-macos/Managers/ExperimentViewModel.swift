@@ -38,7 +38,7 @@ class ExperimentViewModel: ObservableObject {
     }
 
     func saveData() {
-        let data = Participant(id: id, age: age, genderIdentity: genderIdentity, email: email, questionnaireOptIn: sendQuestionnaire, completedExperiments: experiments)
+        let data = Participant(id: id, age: age, genderIdentity: genderIdentity, completedExperiments: experiments)
 
         let encoder = JSONEncoder()
         if let encodedData = try? encoder.encode(data) {
@@ -50,12 +50,10 @@ class ExperimentViewModel: ObservableObject {
 }
 
 extension ExperimentViewModel {
-    func setup(id: String, age: String, genderIdentity: String, email: String, sendQuestionnaire: Bool) -> ExperimentViewModel {
+    func setup(id: String, age: String, genderIdentity: String) -> ExperimentViewModel {
         self.id = id
         self.age = age
         self.genderIdentity = genderIdentity
-        self.email = email
-        self.sendQuestionnaire = sendQuestionnaire
         return self
     }
 }

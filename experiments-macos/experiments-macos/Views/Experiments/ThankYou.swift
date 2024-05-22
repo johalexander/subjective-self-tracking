@@ -5,21 +5,24 @@ struct ThankYou: View {
 
     var body: some View {
         VStack {
-            Text("Thank You! 🎉")
+            Text("Thank you for participating! 🎉")
                 .font(.largeTitle)
                 .padding(.top)
-
-            Text("Thank you for participating in the experiments.")
-                .font(.headline)
-                .padding(.top, 20)
 
             Text("Your data has been saved.")
                 .font(.body)
                 .padding(.top, 10)
             
-            Text("Your contribution is much appreciated. ❤️")
+            Link("Please complete the following survey", destination: URL(string: "https://www.google.com")!)
+                .padding(.top, 10)
+            
+            Text("Your contribution is much appreciated ❤️")
                 .font(.body)
                 .padding(.top, 10)
+            
+            Text("Go grab an ice cream on me 🍦")
+                .font(.body)
+                .padding(.top, 1)
         }
         .padding()
         .onAppear {

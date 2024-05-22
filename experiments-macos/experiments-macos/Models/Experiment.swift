@@ -10,14 +10,22 @@ import Foundation
 struct Experiment: Identifiable, Codable {
     let id: String
     let experimentType: ExperimentType
-    var stimuliEntry: [Stimuli]
+    var successfulStimuli: [Stimuli]
+    var failedStimuli: [Stimuli]
 }
 
 struct Stimuli: Identifiable, Codable {
     let id: String
-    let greyscale: String
-    let number: String
+    let value: Double
+    let inputType: InputType
     let sensorReading: SensorReading
+}
+
+enum InputType: String, CaseIterable, Identifiable, Codable {
+    case slider
+    case device
+    
+    var id: Self { self }
 }
 
 enum ExperimentType: Int, CaseIterable, Identifiable, Codable {
@@ -44,6 +52,23 @@ enum ExperimentType: Int, CaseIterable, Identifiable, Codable {
             return "Gesture: Roll - Greyscale"
         case .gestureRollNumber:
             return "Roll - Number"
+        }
+    }
+    
+    var type: String {
+        switch self {
+        case .sliderGreyscale:
+            return "slider_greyscale"
+        case .sliderNumber:
+            return "slider_number"
+        case .gesturePitchGreyscale:
+            return "gesture_pitch_greyscale"
+        case .gesturePitchNumber:
+            return "gesture_pitch_number"
+        case .gestureRollGreyscale:
+            return "gesture_roll_greyscale"
+        case .gestureRollNumber:
+            return "gesture_roll_number"
         }
     }
 }

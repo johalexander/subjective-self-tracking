@@ -13,8 +13,7 @@ class DataViewModel: ObservableObject {
     @Published var ipAddress: String = "Unknown"
     @Published var port: Int = 8080
     
-    @Published var receivedData: Bool = false
-    @Published var sufficientCalibration: Bool = false
+    @Published var receivedData: DataContainer = DataContainer(successful: false, sufficientCalibration: false)
     @Published var associatedReading: SensorReading = SensorReading(timestamp: 0, duration: 0, stability: "", activity: "", activity_confidence: 0, calibration_status: 0, w: 0, x: 0, y: 0, z: 0)
     
     @Published var navItems: [Item] = [
@@ -131,8 +130,7 @@ class DataViewModel: ObservableObject {
 
     func markDataReceived(data: SensorReading, sufficientCalibration: Bool) {
         DispatchQueue.main.async {
-            self.receivedData = true
-            self.sufficientCalibration = sufficientCalibration
+            self.receivedData = DataContainer(successful: true, sufficientCalibration: sufficientCalibration)
             self.associatedReading = data
         }
         
@@ -143,8 +141,7 @@ class DataViewModel: ObservableObject {
 
     func resetReceivedData() {
         DispatchQueue.main.async {
-            self.receivedData = false
-            self.sufficientCalibration = false
+            self.receivedData = DataContainer(successful: false, sufficientCalibration: false)
         }
     }
     
@@ -154,4 +151,9 @@ class DataViewModel: ObservableObject {
             self.numberRepository.consume()
         }
     }
+}
+
+struct DataContainer: Equatable {
+    var successful: Bool
+    var sufficientCalibration: Bool
 }

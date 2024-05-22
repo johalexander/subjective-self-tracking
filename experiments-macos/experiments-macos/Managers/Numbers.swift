@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class Numbers {
-    private let generatedNumbers = [Int](0...90)
+    private let generatedNumbers = [Int](0...100)
     
     private var queuedNumbers: [Int]
     

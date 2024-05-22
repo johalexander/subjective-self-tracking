@@ -22,51 +22,61 @@ struct Practice: View {
     @State private var selectedMovement = "Pitch"
     var movements = ["Pitch", "Roll"]
     
+    @State private var transitionColor: Color = .clear
+    
+    @State private var transitionOpacity: Double = 1.0
+    
     @State private var selectedColor: Color = DataViewModel.sharedSingleton.getColor()
     @State private var selectedNumber: String = DataViewModel.sharedSingleton.getNumber()
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Picker(selection: $selectedStimuli, label: Text("Practice stimuli")) {
-                    ForEach(stimuli, id: \.self) {
-                        Text($0)
+                DisclosureGroup("Settings") {
+                    Picker(selection: $selectedStimuli, label: Text("Practice stimuli")) {
+                        ForEach(stimuli, id: \.self) {
+                            Text($0)
+                        }
                     }
-                }
-                .onChange(of: selectedStimuli, {
-                    input = 0
-                })
-                .pickerStyle(.segmented)
-                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                
-                Picker(selection: $selectedMode, label: Text("Practice mode")) {
-                    ForEach(modes, id: \.self) {
-                        Text($0)
+                    .onChange(of: selectedStimuli, {
+                        input = 0
+                    })
+                    .pickerStyle(.segmented)
+                    
+                    Picker(selection: $selectedMode, label: Text("Practice mode")) {
+                        ForEach(modes, id: \.self) {
+                            Text($0)
+                        }
                     }
+                    .pickerStyle(.segmented)
                 }
-                .pickerStyle(.segmented)
                 
                 ZStack {
                     if selectedStimuli == "Greyscale" {
                         Image("Static")
                             .resizable()
-                            .frame(height: 240)
+                            .frame(height: 600)
                             .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .shadow(radius: 7)
                         
                         RoundedRectangle(cornerRadius: 20)
                             .fill(selectedColor)
-                            .frame(width: 150, height: 150)
+                            .frame(width: 300, height: 300)
+                            .opacity(transitionOpacity)
+                            .shadow(radius: 10)
                     } else {
                         RoundedRectangle(cornerRadius: 20)
                             .fill(.white)
-                            .frame(height: 240)
+                            .frame(height: 600)
+                            .shadow(radius: 7)
                         
                         RoundedRectangle(cornerRadius: 20)
                             .fill(Color(red: 44/255, green:44/255, blue:42/255))
-                            .frame(width: 150, height: 150)
+                            .frame(width: 300, height: 300)
+                            .shadow(radius: 10)
                         
                         Text(selectedNumber)
-                            .font(.system(size: 60))
+                            .font(.system(size: 100))
                     }
                 }
                 .animation(.easeIn, value: selectedStimuli)
@@ -160,8 +170,8 @@ struct Practice: View {
                             .foregroundStyle(.secondary)
                             
                             ZStack {
-                                if vm.receivedData {
-                                    if vm.sufficientCalibration {
+                                if vm.receivedData.successful {
+                                    if vm.receivedData.sufficientCalibration {
                                         HStack(spacing: 10) {
                                             Image(systemName: "checkmark.circle")
                                                 .resizable()
@@ -185,7 +195,7 @@ struct Practice: View {
                                     }
                                 }
                             }
-                            .animation(.easeIn, value: vm.receivedData)
+                            .animation(.easeIn, value: vm.receivedData.successful)
                             
                             DisclosureGroup("Reference scales") {
                                 SquareImage(image: Image("GreyscaleValues").resizable())
@@ -202,7 +212,7 @@ struct Practice: View {
             }
             .padding()
             .onChange(of: vm.receivedData, { oldValue, newValue in
-                if oldValue && !newValue && vm.sufficientCalibration {
+                if oldValue.successful && oldValue.sufficientCalibration && !newValue.successful {
                     consume()
                 }
             })
@@ -211,12 +221,24 @@ struct Practice: View {
     }
     
     func consume() {
-        withAnimation(.easeIn) {
+        withAnimation(.easeIn, {
             vm.consume()
+            transitionOpacity = 0.0
             selectedColor = vm.getColor()
             selectedNumber = vm.getNumber()
+        }) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                withAnimation(.easeIn) {
+                    transitionOpacity = 1.0
+                }
+            }
         }
     }
+}
+
+extension AnyTransition {static var scaleAndSlide: AnyTransition {
+     AnyTransition.scale.combined(with: .slide)
+  }
 }
 
 #Preview {

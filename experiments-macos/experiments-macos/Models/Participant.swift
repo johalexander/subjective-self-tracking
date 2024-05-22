@@ -11,8 +11,6 @@ struct Participant: Identifiable, Codable {
     var id: String
     let age: String
     let genderIdentity: String
-    let email: String
-    let questionnaireOptIn: Bool
     
     var completedExperiments: [Experiment]
     
@@ -21,7 +19,11 @@ struct Participant: Identifiable, Codable {
     }
     
     var totalStimuliCount: String {
-        return String(completedExperiments.reduce(0) { $0 + $1.stimuliEntry.count })
+        return String(completedExperiments.reduce(0) { $0 + $1.successfulStimuli.count + $1.failedStimuli.count })
+    }
+    
+    var totalSuccessfulStimuliCount: String {
+        return String(completedExperiments.reduce(0) { $0 + $1.successfulStimuli.count })
     }
 }
 

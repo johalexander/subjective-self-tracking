@@ -32,6 +32,6 @@ func readParticipantCount() -> Int {
     if let countString = try? String(contentsOf: filename), let count = Int(countString) {
         return count
     } else {
-        return 0 // Default to 0 if the file doesn't exist or can't be read
+        return 0
     }
 }

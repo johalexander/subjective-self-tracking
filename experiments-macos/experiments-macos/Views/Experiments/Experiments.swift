@@ -98,7 +98,7 @@ struct Experiments: View {
                             
                             Label("Hover for data collection purpose", systemImage: "info.circle")
                                 .foregroundColor(.secondary)
-                                .help("Why is this data collected?\n\nThis data is collected for statistical and bias purposes. \n\nEmails may be used to send out a questionnaire to consenting participants. Emails are stored ephemerally.")
+                                .help("Why is this data collected?\n\nThis data is collected for statistical and bias purposes.")
                         }
                         
                         TextField("Age (required)", text: $age)
@@ -111,18 +111,6 @@ struct Experiments: View {
                             Text("Other").tag(Gender.other)
                             Text("Prefer to not disclose").tag(Gender.undisclosed)
                         }
-                        
-                        TextField("Email (optional)", text: $email)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                        
-                        Toggle(isOn: $sendQuestionnaire) {
-                            Text("I would like to answer an optional questionnaire")
-                        }
-                        
-                        Text("Emails are omitted from the generated datasets and will not be a part of any appendix.")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .padding(.top, 2)
                     }
                     
                     Divider().padding(.vertical)
@@ -148,8 +136,8 @@ struct Experiments: View {
                     
                     VStack(alignment: .leading, spacing: 15) {
                         if !enabled {
-                            if vm.receivedData {
-                                if vm.sufficientCalibration {
+                            if vm.receivedData.successful {
+                                if vm.receivedData.sufficientCalibration {
                                     HStack(spacing: 10) {
                                         Image(systemName: "checkmark.circle")
                                             .resizable()
@@ -175,13 +163,13 @@ struct Experiments: View {
                         }
                         
                         NavigationLink(destination: ExperimentView(vm: ExperimentViewModel(participantNumber: participantNumber)
-                            .setup(id: String(participantNumber), age: age, genderIdentity: genderIdentity.rawValue, email: email, sendQuestionnaire: sendQuestionnaire))) {
+                            .setup(id: String(participantNumber), age: age, genderIdentity: genderIdentity.rawValue))) {
                             Text("Start experiments")
                         }
                         .buttonStyle(.borderedProminent)
                         .disabled(!enabled || age.isEmpty)
                         .onChange(of: vm.receivedData, { oldValue, newValue in
-                            if !oldValue && newValue && vm.sufficientCalibration {
+                            if !oldValue.successful && newValue.successful && newValue.sufficientCalibration {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.8) {
                                     enabled = true
                                 }
