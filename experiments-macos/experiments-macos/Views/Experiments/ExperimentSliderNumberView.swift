@@ -51,6 +51,26 @@ struct ExperimentSliderNumberView: View {
                 
                 Divider()
                 
+                if inTrial {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("Task context")
+                            .font(.title)
+                            .padding(.top, 10)
+                        
+                        Text("Adjust the slider to match the number as closely as possible")
+                            .font(.title3)
+                            .padding(.bottom, 2)
+                        
+                        AnimatedImage("slider_number")
+                            .frame(width: 450, height: 45)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .shadow(radius: 10)
+                            .padding()
+                        
+                        Divider()
+                    }
+                }
+                
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)
                         .fill(.white)

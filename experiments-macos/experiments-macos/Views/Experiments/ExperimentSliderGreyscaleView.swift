@@ -59,8 +59,15 @@ struct ExperimentSliderGreyscaleView: View {
                             .font(.title)
                             .padding(.top, 10)
                         
-                        SquareImage(image: Image("GreyscaleValues").resizable())
-                            .frame(height: 130)
+                        Text("Adjust the slider to match the color as closely as possible")
+                            .font(.title3)
+                            .padding(.bottom, 2)
+                        
+                        AnimatedImage("slider_black_white")
+                            .frame(width: 450, height: 45)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .shadow(radius: 10)
+                            .padding()
                         
                         Divider()
                     }

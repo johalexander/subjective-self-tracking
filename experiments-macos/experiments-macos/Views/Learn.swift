@@ -109,14 +109,43 @@ struct Learn: View {
                                 }
                             }
                             HStack(spacing: 20) {
+                                AnimatedImage("slider_number")
+                                    .frame(width: 450, height: 45)
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    .shadow(radius: 10)
+                                    .padding()
+                                
+                                Divider()
+                                
                                 Spacer()
-                                SquareImage(image: Image("EulerAngles").resizable())
-                                    .frame(width: 160, height: 160)
+                                SquareImage(image: Image("front_0_45_90").resizable())
+                                    .frame(width: 450, height: 100)
                                 
                                 Spacer()
                                 
-                                SquareImage(image: Image("EulerAngles").resizable())
-                                    .frame(width: 160, height: 160)
+                                SquareImage(image: Image("side_0_45_90").resizable())
+                                    .frame(width: 450, height: 100)
+                                Spacer()
+                            }
+                            .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                            
+                            HStack(spacing: 20) {
+                                AnimatedImage("slider_black_white")
+                                    .frame(width: 450, height: 45)
+                                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                                    .shadow(radius: 10)
+                                    .padding()
+                                
+                                Divider()
+                                
+                                Spacer()
+                                SquareImage(image: Image("front_top_0_45_90").resizable())
+                                    .frame(width: 450, height: 200)
+                                
+                                Spacer()
+                                
+                                SquareImage(image: Image("side_top_0_45_90").resizable())
+                                    .frame(width: 450, height: 200)
                                 Spacer()
                             }
                             .padding(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))

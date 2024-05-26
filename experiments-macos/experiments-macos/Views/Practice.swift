@@ -77,6 +77,8 @@ struct Practice: View {
                             .font(.system(size: 100))
                     }
                 }
+                .animation(.easeIn, value: selectedNumber)
+                .animation(.easeIn, value: selectedColor)
                 .animation(.easeIn, value: selectedStimuli)
                 .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                 
@@ -117,10 +119,24 @@ struct Practice: View {
                             }
                             
                             HStack(alignment: .center) {
-                                if selectedStimuli == "Greyscale" {
-                                    DisclosureGroup("Possible greyscale values") {
-                                        SquareImage(image: Image("GreyscaleValues").resizable())
-                                            .frame(height: 130)
+                                DisclosureGroup("Reference scales") {
+                                    if selectedStimuli == "Greyscale" {
+                                        VStack {
+                                            AnimatedImage("slider_black_white")
+                                                .frame(width: 450, height: 45)
+                                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                                                .shadow(radius: 10)
+                                                .padding()
+                                            
+                                            SquareImage(image: Image("GreyscaleValues").resizable())
+                                                .frame(height: 130)
+                                                .padding()
+                                        }
+                                    } else {
+                                        AnimatedImage("slider_number")
+                                            .frame(width: 450, height: 45)
+                                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                                            .shadow(radius: 10)
                                             .padding()
                                     }
                                 }
@@ -196,9 +212,45 @@ struct Practice: View {
                             .animation(.easeIn, value: vm.receivedData.successful)
                             
                             DisclosureGroup("Reference scales") {
-                                SquareImage(image: Image("GreyscaleValues").resizable())
-                                    .frame(height: 130)
-                                    .padding()
+                                if selectedStimuli == "Greyscale" {
+                                    VStack {
+                                        if selectedMovement == "Pitch" {
+                                            AnimatedImage("front_black_white")
+                                                .frame(width: 450, height: 300)
+                                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                                                .shadow(radius: 10)
+                                                .padding()
+                                            
+                                            SquareImage(image: Image("GreyscaleValues").resizable())
+                                                .frame(height: 130)
+                                                .padding()
+                                        } else {
+                                            AnimatedImage("side_black_white")
+                                                .frame(width: 450, height: 300)
+                                                .clipShape(RoundedRectangle(cornerRadius: 20))
+                                                .shadow(radius: 10)
+                                                .padding()
+                                            
+                                            SquareImage(image: Image("GreyscaleValues").resizable())
+                                                .frame(height: 130)
+                                                .padding()
+                                        }
+                                    }
+                                } else {
+                                    if selectedMovement == "Pitch" {
+                                        AnimatedImage("front_number")
+                                            .frame(width: 450, height: 300)
+                                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                                            .shadow(radius: 10)
+                                            .padding()
+                                    } else {
+                                        AnimatedImage("side_number")
+                                            .frame(width: 450, height: 300)
+                                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                                            .shadow(radius: 10)
+                                            .padding()
+                                    }
+                                }
                             }
                         }
                         .padding()
@@ -224,6 +276,7 @@ struct Practice: View {
             transitionOpacity = 0.0
             selectedColor = vm.getColor()
             selectedNumber = vm.getNumber()
+            input = 0
         }) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 withAnimation(.easeIn) {
@@ -232,11 +285,6 @@ struct Practice: View {
             }
         }
     }
-}
-
-extension AnyTransition {static var scaleAndSlide: AnyTransition {
-     AnyTransition.scale.combined(with: .slide)
-  }
 }
 
 #Preview {

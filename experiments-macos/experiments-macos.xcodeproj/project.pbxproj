@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C5E561B2C0289B6002251D6 /* AnimatedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E561A2C0289B6002251D6 /* AnimatedImage.swift */; };
+		5C5E56252C02A727002251D6 /* front_black_white.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5C5E56232C028B7B002251D6 /* front_black_white.gif */; };
+		5C5E56262C02A727002251D6 /* front_number.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5C5E56242C028B7B002251D6 /* front_number.gif */; };
+		5C5E56412C02B5DB002251D6 /* side_black_white.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5C5E563F2C02B5DB002251D6 /* side_black_white.gif */; };
+		5C5E56422C02B5DC002251D6 /* side_number.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5C5E56402C02B5DB002251D6 /* side_number.gif */; };
+		5C5E56452C02BBB7002251D6 /* slider_number.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5C5E56432C02BBB7002251D6 /* slider_number.gif */; };
+		5C5E56462C02BBB7002251D6 /* slider_black_white.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5C5E56442C02BBB7002251D6 /* slider_black_white.gif */; };
 		5CD3DA322BF8097300B794FF /* SubjectiveSelfTrackingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA312BF8097300B794FF /* SubjectiveSelfTrackingApp.swift */; };
 		5CD3DA342BF8097300B794FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3DA332BF8097300B794FF /* ContentView.swift */; };
 		5CD3DA382BF8097500B794FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CD3DA372BF8097500B794FF /* Assets.xcassets */; };
@@ -38,6 +45,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C5E561A2C0289B6002251D6 /* AnimatedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImage.swift; sourceTree = "<group>"; };
+		5C5E56232C028B7B002251D6 /* front_black_white.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = front_black_white.gif; sourceTree = "<group>"; };
+		5C5E56242C028B7B002251D6 /* front_number.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = front_number.gif; sourceTree = "<group>"; };
+		5C5E563F2C02B5DB002251D6 /* side_black_white.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = side_black_white.gif; sourceTree = "<group>"; };
+		5C5E56402C02B5DB002251D6 /* side_number.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = side_number.gif; sourceTree = "<group>"; };
+		5C5E56432C02BBB7002251D6 /* slider_number.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = slider_number.gif; sourceTree = "<group>"; };
+		5C5E56442C02BBB7002251D6 /* slider_black_white.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = slider_black_white.gif; sourceTree = "<group>"; };
 		5CD3DA2E2BF8097300B794FF /* Subjective Self Tracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Subjective Self Tracking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CD3DA312BF8097300B794FF /* SubjectiveSelfTrackingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectiveSelfTrackingApp.swift; sourceTree = "<group>"; };
 		5CD3DA332BF8097300B794FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,6 +119,12 @@
 				5CD3DA6A2BF9767400B794FF /* Views */,
 				5CD3DA312BF8097300B794FF /* SubjectiveSelfTrackingApp.swift */,
 				5CD3DA582BF839CE00B794FF /* Server.swift */,
+				5C5E56232C028B7B002251D6 /* front_black_white.gif */,
+				5C5E56242C028B7B002251D6 /* front_number.gif */,
+				5C5E56442C02BBB7002251D6 /* slider_black_white.gif */,
+				5C5E56432C02BBB7002251D6 /* slider_number.gif */,
+				5C5E56402C02B5DB002251D6 /* side_number.gif */,
+				5C5E563F2C02B5DB002251D6 /* side_black_white.gif */,
 				5CD3DA372BF8097500B794FF /* Assets.xcassets */,
 				5CD3DA3C2BF8097500B794FF /* experiments_macos.entitlements */,
 				5CD3DA392BF8097500B794FF /* Preview Content */,
@@ -161,6 +181,7 @@
 				5CD3DA422BF80F2B00B794FF /* NavigationItem.swift */,
 				5CD3DA5E2BF8E77C00B794FF /* CircleImage.swift */,
 				5CD3DA602BF8FA4F00B794FF /* SquareImage.swift */,
+				5C5E561A2C0289B6002251D6 /* AnimatedImage.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -244,8 +265,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C5E56252C02A727002251D6 /* front_black_white.gif in Resources */,
+				5C5E56462C02BBB7002251D6 /* slider_black_white.gif in Resources */,
+				5C5E56262C02A727002251D6 /* front_number.gif in Resources */,
+				5C5E56452C02BBB7002251D6 /* slider_number.gif in Resources */,
 				5CD3DA3B2BF8097500B794FF /* Preview Assets.xcassets in Resources */,
 				5CD3DA382BF8097500B794FF /* Assets.xcassets in Resources */,
+				5C5E56422C02B5DC002251D6 /* side_number.gif in Resources */,
+				5C5E56412C02B5DB002251D6 /* side_black_white.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +307,7 @@
 				5CD3DA652BF9333C00B794FF /* Greyscales.swift in Sources */,
 				5CD3DA762BF9B79F00B794FF /* ThankYou.swift in Sources */,
 				5CD3DA322BF8097300B794FF /* SubjectiveSelfTrackingApp.swift in Sources */,
+				5C5E561B2C0289B6002251D6 /* AnimatedImage.swift in Sources */,
 				5CD3DA472BF8198200B794FF /* NavigationList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
