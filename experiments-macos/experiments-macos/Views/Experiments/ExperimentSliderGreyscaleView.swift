@@ -27,7 +27,7 @@ struct ExperimentSliderGreyscaleView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(alignment: .leading) {
                 HStack {
                     Spacer()
                     if inTrial {
@@ -57,7 +57,6 @@ struct ExperimentSliderGreyscaleView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         Text("Task context")
                             .font(.title)
-                            .padding(.top, 10)
                         
                         Text("Adjust the slider to match the color as closely as possible")
                             .font(.title3)
@@ -68,9 +67,10 @@ struct ExperimentSliderGreyscaleView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 20))
                             .shadow(radius: 10)
                             .padding()
-                        
-                        Divider()
                     }
+                    .padding()
+                    
+                    Divider()
                 }
                 
                 ZStack {
@@ -86,6 +86,7 @@ struct ExperimentSliderGreyscaleView: View {
                         .opacity(transitionOpacity)
                         .shadow(radius: 10)
                 }
+                .animation(.easeIn, value: selectedColor)
                 .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                 
                 Divider()

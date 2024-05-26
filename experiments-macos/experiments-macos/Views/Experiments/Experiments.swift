@@ -34,6 +34,7 @@ struct ExperimentView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .animation(.bouncy, value: experiments.currentExperimentIndex)
         .onAppear {
             saveParticipantCount(experiments.participantNumber)
             data.shuffleStimuli()

@@ -8,6 +8,15 @@ struct ExperimentGestureRollGreyscaleView: View {
     @State var stimuliCount: Int = 1
     @State var maxStimuliCount: Int = 20
     
+    @State var trialStimuliCount: Int = 1
+    @State var maxTrialStimuliCount: Int = 5
+    
+    @State var inTrial: Bool = true
+    
+    @State private var transitionOpacity: Double = 1.0
+    
+    @State private var selectedColor: Color = DataViewModel.sharedSingleton.getTrialColor()
+    
     let experimentType: ExperimentType = .gestureRollGreyscale
     @State var successfulStimuli: [Stimuli] = []
     @State var failedStimuli: [Stimuli] = []
@@ -15,12 +24,112 @@ struct ExperimentGestureRollGreyscaleView: View {
     @State var endedDate: Date = Date.now
     
     var body: some View {
-        VStack {
-            Text("Stimuli \(stimuliCount) out of \(maxStimuliCount)")
-                .font(.largeTitle)
+        ScrollView {
+            VStack(alignment: .leading) {
+                HStack {
+                    Spacer()
+                    if inTrial {
+                        VStack {
+                            Text("Trial stimuli **\(trialStimuliCount)** out of **\(maxTrialStimuliCount)**")
+                                .font(.largeTitle)
+                                .padding()
+                            Text("Use these trial attempts to familiarise yourself with the input type")
+                                .font(.body)
+                                .foregroundStyle(.secondary)
+                                .padding(.bottom, 5)
+                        }
+                    } else {
+                        Text("Stimuli **\(stimuliCount)** out of **\(maxStimuliCount)**")
+                            .font(.largeTitle)
+                            .padding()
+                    }
+                    Spacer()
+                }
+                .animation(.easeIn, value: stimuliCount)
+                .animation(.easeIn, value: trialStimuliCount)
+                .animation(.easeIn, value: inTrial)
+                
+                Divider()
+                
+                if inTrial {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("Task context")
+                            .font(.title)
+                        
+                        Text("Adjust rotation of your forearm to match the color as closely as possible")
+                            .font(.title3)
+                            .padding(.bottom, 2)
+                        
+                        AnimatedImage("side_black_white")
+                            .frame(width: 450, height: 300)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .shadow(radius: 10)
+                    }
+                    .padding()
+                    
+                    Divider()
+                }
+                
+                ZStack {
+                    Image("Static")
+                        .resizable()
+                        .frame(height: 600)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .shadow(radius: 7)
+                    
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(selectedColor)
+                        .frame(width: 300, height: 300)
+                        .opacity(transitionOpacity)
+                        .shadow(radius: 10)
+                }
+                .animation(.easeIn, value: selectedColor)
+                .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+                
+                Divider()
+                
+                VStack(alignment: .leading, spacing: 20) {
+                    VStack(alignment: .leading) {
+                        Text("Adjust rotation of your forearm to match the color as closely as possible")
+                            .font(.title3)
+                            .padding(.bottom, 2)
+                        
+                        Text("Click the device button to indicate a response")
+                            .font(.body)
+                            .foregroundStyle(.secondary)
+                    }
+                    
+                    ZStack {
+                        if data.receivedData.successful {
+                            if data.receivedData.sufficientCalibration {
+                                HStack(spacing: 10) {
+                                    Image(systemName: "checkmark.circle")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(.green)
+                                    Text("Input received!")
+                                }
+                            } else {
+                                HStack(spacing: 10) {
+                                    Image(systemName: "exclamationmark.triangle")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(.yellow)
+                                    Text("Please repeat the input for this stimuli (low calibration)")
+                                }
+                            }
+                        } else {
+                            HStack(spacing: 10) {
+                                ProgressView()
+                                Text("Awaiting input from device...")
+                            }
+                        }
+                    }
+                    .animation(.easeIn, value: data.receivedData.successful)
+                }
                 .padding()
-            
-            
+            }
+            .padding()
         }
         .onAppear {
             startedDate = Date.now
@@ -31,6 +140,17 @@ struct ExperimentGestureRollGreyscaleView: View {
                 experiments.nextExperiment()
             }
         })
+        .onChange(of: trialStimuliCount, { oldValue, newValue in
+            if newValue > maxTrialStimuliCount {
+                inTrial = false
+                selectedColor = data.getColor()
+            }
+        })
+        .onChange(of: data.receivedData, { oldValue, newValue in
+            if oldValue.successful && oldValue.sufficientCalibration && !newValue.successful {
+                submitInput()
+            }
+        })
         .navigationTitle("Experiment " + "\(experiments.currentExperimentIndex + 1): " + ExperimentType.gestureRollGreyscale.description)
     }
     
@@ -38,6 +158,37 @@ struct ExperimentGestureRollGreyscaleView: View {
         endedDate = Date.now
         let experiment = Experiment(id: String(experiments.currentExperimentIndex + 1), experimentType: experimentType.type, successfulStimuli: successfulStimuli, failedStimuli: failedStimuli, startedDate: startedDate, endedDate: endedDate)
         experiments.addExperimentData(experiment)
+    }
+    
+    func addStimuli(successful: Bool) {
+        let stimuli = Stimuli(id: String(stimuliCount), value: 0.0, inputType: .device, sensorReading: data.associatedReading)
+        if successful {
+            successfulStimuli.append(stimuli)
+        } else {
+            failedStimuli.append(stimuli)
+        }
+    }
+    
+    func submitInput() {
+        if inTrial {
+            trialStimuliCount += 1
+        } else {
+            addStimuli(successful: true)
+            stimuliCount += 1
+        }
+        consume()
+    }
+    
+    func consume() {
+        withAnimation(.easeIn) {
+            if inTrial {
+                data.consumeTrialColor()
+                selectedColor = data.getTrialColor()
+            } else {
+                data.consumeColor()
+                selectedColor = data.getColor()
+            }
+        }
     }
 }
 

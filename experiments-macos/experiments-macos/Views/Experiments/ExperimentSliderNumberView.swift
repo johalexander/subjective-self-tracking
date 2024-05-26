@@ -25,7 +25,7 @@ struct ExperimentSliderNumberView: View {
     
     var body: some View {
         ScrollView {
-            VStack {
+            VStack(alignment: .leading) {
                 HStack {
                     Spacer()
                     if inTrial {
@@ -55,7 +55,6 @@ struct ExperimentSliderNumberView: View {
                     VStack(alignment: .leading, spacing: 20) {
                         Text("Task context")
                             .font(.title)
-                            .padding(.top, 10)
                         
                         Text("Adjust the slider to match the number as closely as possible")
                             .font(.title3)
@@ -65,10 +64,10 @@ struct ExperimentSliderNumberView: View {
                             .frame(width: 450, height: 45)
                             .clipShape(RoundedRectangle(cornerRadius: 20))
                             .shadow(radius: 10)
-                            .padding()
-                        
-                        Divider()
                     }
+                    .padding()
+                    
+                    Divider()
                 }
                 
                 ZStack {
@@ -85,6 +84,7 @@ struct ExperimentSliderNumberView: View {
                     Text(selectedNumber)
                         .font(.system(size: 100))
                 }
+                .animation(.easeIn, value: selectedNumber)
                 .padding(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
                 
                 Divider()
