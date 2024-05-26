@@ -37,38 +37,34 @@ struct Learn: View {
                         
                         Divider()
                         
-                        VStack(alignment: .leading) {
-                            Text("What")
-                                .font(.title2)
-                            Text("... is it?")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                            
-                            Text("In recent years, self-tracking or self-quantification has gained popularity, from tracking routine occurrences like sneezing to complex subjective experiences such as PTSD symptoms. The One Button Tracker, a simple yet versatile device, enables users to gain deeper insights into the phenomena they track. This project aims to develop a next-generation self-tracking prototype capable of discerning hand and arm placement in real 3D space. The goal is to introduce modality through gestures when tracking subjective phenomena.")
-                                .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
-                        }
-                        
-                        VStack(alignment: .leading) {
-                            Text("How")
-                                .font(.title2)
-                            Text("... does it work?")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                        
-                            Text("The prototype utilises absolute orientation to discern specific arm and wrist movements, introducing modality without the need for explicit tracking modes. For instance, a specific arm movement coupled with a click could represent a sneeze, while another movement could signify a cough. The introduction of modality aims to add the possibility to classify the tracked phenomena, without impacting device feedback.")
-                                .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
-                         }
-                        
-                        VStack(alignment: .leading) {
-                            Text("Why")
-                                .font(.title2)
-                            Text("... is this important?")
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
-                        
-                            Text("Recent studies applying self-tracking prototypes in various health-related contexts have demonstrated its potential for personal knowledge gain and therapeutic significance. Incorporating feedback and insights from previous studies to overcome current limitations and provide enhanced benefits is paramount for future work. This work intends to lay a foundation for gesture-based modality in a self-tracking context.")
-                                .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
+                        DisclosureGroup("What is this about?") {
+                            VStack(alignment: .leading, spacing: 10) {
+                                VStack(alignment: .leading) {
+                                    Text("What is it?")
+                                        .font(.title2)
+                                    
+                                    Text("In recent years, self-tracking or self-quantification has gained popularity, from tracking routine occurrences like sneezing to complex subjective experiences such as PTSD symptoms. The One Button Tracker, a simple yet versatile device, enables users to gain deeper insights into the phenomena they track. This project aims to develop a next-generation self-tracking prototype capable of discerning hand and arm placement in real 3D space. The goal is to introduce modality through gestures when tracking subjective phenomena.")
+                                        .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
+                                }
+                                .padding(.top, 10)
+                                
+                                VStack(alignment: .leading) {
+                                    Text("How does it work?")
+                                        .font(.title2)
+                                    
+                                    Text("The prototype utilises absolute orientation to discern specific arm and wrist movements, introducing modality without the need for explicit tracking modes. For instance, a specific arm movement coupled with a click could represent a sneeze, while another movement could signify a cough. The introduction of modality aims to add the possibility to classify the tracked phenomena, without impacting device feedback.")
+                                        .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
+                                }
+                                
+                                VStack(alignment: .leading) {
+                                    Text("Why is this important?")
+                                        .font(.title2)
+                                    
+                                    Text("Recent studies applying self-tracking prototypes in various health-related contexts have demonstrated its potential for personal knowledge gain and therapeutic significance. Incorporating feedback and insights from previous studies to overcome current limitations and provide enhanced benefits is paramount for future work. This work intends to lay a foundation for gesture-based modality in a self-tracking context.")
+                                        .padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
+                                }
                             }
+                        }
                     }
                     
                     Divider()

@@ -119,7 +119,7 @@ struct Practice: View {
                             }
                             
                             HStack(alignment: .center) {
-                                DisclosureGroup("Reference scales") {
+                                DisclosureGroup("What do I do?") {
                                     if selectedStimuli == "Greyscale" {
                                         VStack {
                                             AnimatedImage("slider_black_white")
@@ -211,7 +211,7 @@ struct Practice: View {
                             }
                             .animation(.easeIn, value: vm.receivedData.successful)
                             
-                            DisclosureGroup("Reference scales") {
+                            DisclosureGroup("What do I do?") {
                                 if selectedStimuli == "Greyscale" {
                                     VStack {
                                         if selectedMovement == "Pitch" {
