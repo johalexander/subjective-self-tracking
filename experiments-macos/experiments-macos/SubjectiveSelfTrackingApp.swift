@@ -10,12 +10,14 @@ import SwiftUI
 @main
 struct SubjectiveSelfTrackingApp: App {
     @StateObject private var vm = DataViewModel.sharedSingleton
+    @StateObject private var evm = ExperimentViewModel(participantNumber: readParticipantCount() + 1)
     private var server = Server()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(vm)
+                .environmentObject(evm)
                 .onAppear {
                     Task { await server.start() }
                 }

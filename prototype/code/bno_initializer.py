@@ -1,7 +1,6 @@
 import busio
 import board
 import time
-import sys
 from adafruit_bno08x.uart import BNO08X_UART
 from adafruit_bno08x import BNO_REPORT_ACCELEROMETER
 from adafruit_bno08x import BNO_REPORT_GYROSCOPE
@@ -10,7 +9,7 @@ from adafruit_bno08x import BNO_REPORT_ROTATION_VECTOR
 from adafruit_bno08x import BNO_REPORT_STABILITY_CLASSIFIER
 from adafruit_bno08x import BNO_REPORT_ACTIVITY_CLASSIFIER
 
-max_retries = 10
+max_retries = 5
 retry_count = 0
 
 
@@ -33,7 +32,6 @@ def init():
 
     if bno is None:
         print("Failed to initialize the BNO board after several attempts...")
-        sys.exit()
 
     return bno
 
@@ -51,7 +49,11 @@ def __initialize_bno():
         bno.enable_feature(BNO_REPORT_STABILITY_CLASSIFIER)
         bno.enable_feature(BNO_REPORT_ACTIVITY_CLASSIFIER)
         return bno
+    except OSError as e:
+        print(f"OSError: Failed to initialize BNO board: {e}")
     except RuntimeError as e:
-        print(f"Failed to initialize BNO board: {e}")
-        uart.deinit()
-        return None
+        print(f"RuntimeError: Failed to initialize BNO board: {e}")
+    except Exception as e:
+        print(f"Unexpected error: Failed to initialize BNO board: {e}")
+
+    return None

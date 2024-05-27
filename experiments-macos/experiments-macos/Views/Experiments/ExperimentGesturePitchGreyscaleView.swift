@@ -25,6 +25,25 @@ struct ExperimentGesturePitchGreyscaleView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
+                if inTrial {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("Task context")
+                            .font(.title)
+                        
+                        Text("Adjust positioning of your arm to match the color as closely as possible")
+                            .font(.title3)
+                            .padding(.bottom, 2)
+                        
+                        AnimatedImage("front_black_white")
+                            .frame(width: 450, height: 300)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .shadow(radius: 10)
+                    }
+                    .padding()
+                    
+                    Divider()
+                }
+                
                 HStack {
                     Spacer()
                     if inTrial {
@@ -49,25 +68,6 @@ struct ExperimentGesturePitchGreyscaleView: View {
                 .animation(.easeIn, value: inTrial)
                 
                 Divider()
-                
-                if inTrial {
-                    VStack(alignment: .leading, spacing: 20) {
-                        Text("Task context")
-                            .font(.title)
-                        
-                        Text("Adjust positioning of your arm to match the color as closely as possible")
-                            .font(.title3)
-                            .padding(.bottom, 2)
-                        
-                        AnimatedImage("front_black_white")
-                            .frame(width: 450, height: 300)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                            .shadow(radius: 10)
-                    }
-                    .padding()
-                    
-                    Divider()
-                }
                 
                 ZStack {
                     Image("Static")
@@ -135,14 +135,23 @@ struct ExperimentGesturePitchGreyscaleView: View {
         }
         .onChange(of: stimuliCount, { oldValue, newValue in
             if newValue > maxStimuliCount {
-                storeExperimentData()
-                experiments.nextExperiment()
+                DispatchQueue.main.async {
+                    withAnimation(.easeIn) {
+                        storeExperimentData()
+                        experiments.nextExperiment()
+                    }
+                }
             }
         })
         .onChange(of: trialStimuliCount, { oldValue, newValue in
             if newValue > maxTrialStimuliCount {
-                inTrial = false
-                selectedColor = data.getColor()
+                DispatchQueue.main.async {
+                    withAnimation(.easeIn) {
+                        inTrial = false
+                        data.consumeColor()
+                        selectedColor = data.getColor()
+                    }
+                }
             }
         })
         .onChange(of: data.receivedData, { oldValue, newValue in
@@ -150,7 +159,6 @@ struct ExperimentGesturePitchGreyscaleView: View {
                 submitInput()
             }
         })
-        .navigationTitle("Experiment " + "\(experiments.currentExperimentIndex + 1): " + ExperimentType.gesturePitchGreyscale.description)
     }
     
     func storeExperimentData() {
@@ -179,13 +187,15 @@ struct ExperimentGesturePitchGreyscaleView: View {
     }
     
     func consume() {
-        withAnimation(.easeIn) {
-            if inTrial {
-                data.consumeTrialColor()
-                selectedColor = data.getTrialColor()
-            } else {
-                data.consumeColor()
-                selectedColor = data.getColor()
+        DispatchQueue.main.async {
+            withAnimation(.easeIn) {
+                if inTrial {
+                    data.consumeTrialColor()
+                    selectedColor = data.getTrialColor()
+                } else {
+                    data.consumeColor()
+                    selectedColor = data.getColor()
+                }
             }
         }
     }

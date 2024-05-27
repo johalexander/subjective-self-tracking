@@ -11,6 +11,10 @@ import SwiftUI
 struct ExperimentView: View {
     @ObservedObject var experiments: ExperimentViewModel
     @ObservedObject var data: DataViewModel
+    
+    @State var participantNumber: Int = 0
+    @State var age: String = ""
+    @State var genderIdentity: Gender = Gender.undisclosed
 
     var body: some View {
         VStack {
@@ -33,9 +37,11 @@ struct ExperimentView: View {
                 ThankYou(vm: experiments)
             }
         }
+        .navigationTitle("Experiment " + "\(experiments.currentExperimentIndex + 1): " + experiments.experimentOrder[experiments.currentExperimentIndex].description)
         .navigationBarBackButtonHidden()
         .animation(.bouncy, value: experiments.currentExperimentIndex)
         .onAppear {
+            experiments.setup(participantNumber: participantNumber, age: age, genderIdentity: genderIdentity.rawValue)
             saveParticipantCount(experiments.participantNumber)
             data.shuffleStimuli()
         }
@@ -44,8 +50,9 @@ struct ExperimentView: View {
 
 struct Experiments: View {
     @EnvironmentObject var vm: DataViewModel
+    @EnvironmentObject var evm: ExperimentViewModel
     
-    @State private var participantNumber: Int = readParticipantCount() + 1
+    @State private var participantNumber: Int = 0
     @State private var age: String = ""
     @State private var genderIdentity: Gender = Gender.undisclosed
     
@@ -163,8 +170,7 @@ struct Experiments: View {
                             }
                         }
                         
-                        NavigationLink(destination: ExperimentView(experiments: ExperimentViewModel(participantNumber: participantNumber)
-                            .setup(id: String(participantNumber), age: age, genderIdentity: genderIdentity.rawValue), data: vm)) {
+                        NavigationLink(destination: ExperimentView(experiments: evm, data: vm, participantNumber: participantNumber, age: age, genderIdentity: genderIdentity)) {
                             Text("Start experiments")
                         }
                         .buttonStyle(.borderedProminent)
@@ -183,6 +189,9 @@ struct Experiments: View {
                 .padding()
             }
         }
+        .onAppear {
+            participantNumber = readParticipantCount() + 1
+        }
         .navigationTitle("🧪 Experiments")
     }
 }
@@ -190,4 +199,5 @@ struct Experiments: View {
 #Preview {
     Experiments()
         .environmentObject(DataViewModel())
+        .environmentObject(ExperimentViewModel(participantNumber: readParticipantCount() + 1))
 }

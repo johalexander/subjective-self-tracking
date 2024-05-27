@@ -1,9 +1,8 @@
 import time
 import board
 import digitalio
-import sync_time
 import battery_reading
-import on_disk_storage
+import on_disk_storage_quaternion
 import bno_initializer
 import backend
 import supervisor
@@ -14,11 +13,7 @@ button_pin.direction = digitalio.Direction.INPUT
 button_pin.pull = digitalio.Pull.UP
 button = Debouncer(button_pin)
 
-motor_pin = digitalio.DigitalInOut(board.D12)
-motor_pin.direction = digitalio.Direction.OUTPUT
-motor_pin.value = False
-
-sync_time.sync_rtc()
+backend.sync_rtc()
 bno = bno_initializer.init()
 
 last_write_time = time.monotonic()
@@ -34,7 +29,7 @@ def process_data(
     calibration_status,
     quaternion,
 ):
-    on_disk_storage.add_to_queue(
+    on_disk_storage_quaternion.add_to_queue(
         timestamp,
         duration,
         stability,
@@ -76,10 +71,7 @@ while True:
 
         calibration_status = bno.calibration_status
 
-        motor_pin.value = True
-
     if button.rose:
-        motor_pin.value = False
         duration = int(button.last_duration * 1e3)
 
         if duration > 15000:
@@ -97,7 +89,7 @@ while True:
 
     if time.monotonic() - last_write_time > write_interval and button.value:
         battery_reading.log_battery_voltage()
-        on_disk_storage.write_to_disk()
+        on_disk_storage_quaternion.write_to_disk()
         last_write_time = time.monotonic()
 
     time.sleep(0.02)

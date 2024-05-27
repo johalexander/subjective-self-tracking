@@ -10,6 +10,7 @@ import SwiftUI
 
 struct NavigationList: View {
     @EnvironmentObject var vm: DataViewModel
+    @EnvironmentObject var evm: ExperimentViewModel
     @State private var selectedItem: Item?
     
     @State var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
@@ -34,6 +35,7 @@ struct NavigationList: View {
                 NavigationLink {
                     Experiments()
                         .environmentObject(vm)
+                        .environmentObject(evm)
                 } label: {
                     NavigationItem(item: item2)
                 }
@@ -64,5 +66,6 @@ struct NavigationList: View {
 #Preview {
     NavigationList()
         .environmentObject(DataViewModel())
+        .environmentObject(ExperimentViewModel(participantNumber: readParticipantCount() + 1))
 }
 

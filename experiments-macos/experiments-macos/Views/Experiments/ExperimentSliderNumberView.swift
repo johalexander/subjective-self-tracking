@@ -26,6 +26,25 @@ struct ExperimentSliderNumberView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
+                if inTrial {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text("Task context")
+                            .font(.title)
+                        
+                        Text("Adjust the slider to match the number as closely as possible")
+                            .font(.title3)
+                            .padding(.bottom, 2)
+                        
+                        AnimatedImage("slider_number")
+                            .frame(width: 450, height: 45)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .shadow(radius: 10)
+                    }
+                    .padding()
+                    
+                    Divider()
+                }
+                
                 HStack {
                     Spacer()
                     if inTrial {
@@ -50,25 +69,6 @@ struct ExperimentSliderNumberView: View {
                 .animation(.easeIn, value: inTrial)
                 
                 Divider()
-                
-                if inTrial {
-                    VStack(alignment: .leading, spacing: 20) {
-                        Text("Task context")
-                            .font(.title)
-                        
-                        Text("Adjust the slider to match the number as closely as possible")
-                            .font(.title3)
-                            .padding(.bottom, 2)
-                        
-                        AnimatedImage("slider_number")
-                            .frame(width: 450, height: 45)
-                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                            .shadow(radius: 10)
-                    }
-                    .padding()
-                    
-                    Divider()
-                }
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 20)
@@ -124,17 +124,25 @@ struct ExperimentSliderNumberView: View {
         }
         .onChange(of: stimuliCount, { oldValue, newValue in
             if newValue > maxStimuliCount {
-                storeExperimentData()
-                experiments.nextExperiment()
+                DispatchQueue.main.async {
+                    withAnimation(.easeIn) {
+                        storeExperimentData()
+                        experiments.nextExperiment()
+                    }
+                }
             }
         })
         .onChange(of: trialStimuliCount, { oldValue, newValue in
             if newValue > maxTrialStimuliCount {
-                inTrial = false
-                selectedNumber = data.getNumber()
+                DispatchQueue.main.async {
+                    withAnimation(.easeIn) {
+                        inTrial = false
+                        data.consumeNumber()
+                        selectedNumber = data.getNumber()
+                    }
+                }
             }
         })
-        .navigationTitle("Experiment " + "\(experiments.currentExperimentIndex + 1): " + ExperimentType.sliderNumber.description)
     }
     
     func storeExperimentData() {
@@ -163,14 +171,16 @@ struct ExperimentSliderNumberView: View {
     }
     
     func consume() {
-        withAnimation(.easeIn) {
-            input = 0
-            if inTrial {
-                data.consumeTrialNumber()
-                selectedNumber = data.getTrialNumber()
-            } else {
-                data.consumeNumber()
-                selectedNumber = data.getNumber()
+        DispatchQueue.main.async {
+            withAnimation(.easeIn) {
+                input = 0
+                if inTrial {
+                    data.consumeTrialNumber()
+                    selectedNumber = data.getTrialNumber()
+                } else {
+                    data.consumeNumber()
+                    selectedNumber = data.getNumber()
+                }
             }
         }
     }

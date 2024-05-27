@@ -9,10 +9,11 @@ def add_to_queue(
     stability,
     activity,
     activity_confidence,
-    roll,
-    pitch,
-    yaw,
     calibration_status,
+    w,
+    x,
+    y,
+    z,
 ):
     global write_queue
     write_queue.append(
@@ -22,10 +23,11 @@ def add_to_queue(
             "stability": stability,
             "activity": activity,
             "activity_confidence": activity_confidence,
-            "roll": roll,
-            "pitch": pitch,
-            "yaw": yaw,
             "calibration_status": calibration_status,
+            "w": w,
+            "x": x,
+            "y": y,
+            "z": z,
         }
     )
 
@@ -40,36 +42,43 @@ def add_to_queue(
         activity,
         "Activity Confidence:",
         activity_confidence,
-        "Roll:",
-        roll,
-        "Pitch:",
-        pitch,
-        "Yaw:",
-        yaw,
         "Calibration status:",
         calibration_status,
+        "w:",
+        w,
+        "x:",
+        x,
+        "y:",
+        y,
+        "z:",
+        z,
     )
 
 
 def write_to_disk():
     global write_queue
-    print("Writing to disk - queue size:", len(write_queue))
+    queue_size = len(write_queue)
     write_start = time.monotonic()
     with open("data.csv", "a") as f:
         while write_queue:
             item = write_queue.pop(0)
             f.write(
-                "{0},{1},{2},{3},{4},{5},{6},{7},{8}\n".format(
+                "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}\n".format(
                     item["timestamp"],
                     item["duration"],
                     item["stability"],
                     item["activity"],
                     item["activity_confidence"],
-                    item["roll"],
-                    item["pitch"],
-                    item["yaw"],
                     item["calibration_status"],
+                    item["w"],
+                    item["x"],
+                    item["y"],
+                    item["z"],
                 )
             )
 
-    print("Finished writing to disk -- duration: ", time.monotonic() - write_start)
+    print(
+        "Finished writing to disk -- queue size / duration: ",
+        queue_size,
+        time.monotonic() - write_start,
+    )

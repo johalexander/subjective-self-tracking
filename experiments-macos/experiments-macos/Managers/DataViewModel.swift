@@ -109,8 +109,8 @@ class DataViewModel: ObservableObject {
     }
     
     func updateParticipantCount() {
-        if let count = Int(newParticipantCount) {
-            participantCount = count
+        if let count = Int(self.newParticipantCount) {
+            self.participantCount = count
             saveParticipantCount(count)
             alertMessage = "Participant count updated successfully."
         } else {
@@ -189,8 +189,10 @@ class DataViewModel: ObservableObject {
     }
     
     func shuffleStimuli() {
-        self.colorRepository = Greyscales()
-        self.numberRepository = Numbers()
+        DispatchQueue.main.async {
+            self.colorRepository = Greyscales()
+            self.numberRepository = Numbers()
+        }
     }
 }
 
