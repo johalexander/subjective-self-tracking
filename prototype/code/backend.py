@@ -40,9 +40,12 @@ def send_data(
         "z": z,
     }
 
-    with requests.post(DATA_POST_URL, data=body) as response:
-        print("Status code (/data):", response.status_code)
-        response.close()
+    try:
+        with requests.post(DATA_POST_URL, data=body) as response:
+            print("Status code (/data):", response.status_code)
+            response.close()
+    except OSError as e:
+        print("Failed to send data", e)
 
 
 def sync_rtc():
