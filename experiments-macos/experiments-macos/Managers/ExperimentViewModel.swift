@@ -28,6 +28,7 @@ class ExperimentViewModel: ObservableObject {
     func addExperimentData(_ experiment: Experiment) {
         DispatchQueue.main.async {
             self.experiments.append(experiment)
+            self.saveData()
         }
     }
 

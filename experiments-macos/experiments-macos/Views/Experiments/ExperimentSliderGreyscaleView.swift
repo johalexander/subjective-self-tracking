@@ -97,17 +97,18 @@ struct ExperimentSliderGreyscaleView: View {
                             .font(.title3)
                             .padding(.bottom, 2)
                         
-                        Text("Click the **\"Next\"** button to indicate a response")
+                        Text("Click the **\"Next\" button or Enter (↩)** to indicate a response")
                             .font(.body)
                             .foregroundStyle(.secondary)
                     }
                     
-                    Slider(value: $input, in: 0...100) {
+                    Slider(value: $input, in: 0...49) {
                     } minimumValueLabel: {
                         Text("0")
                     } maximumValueLabel: {
                         Text("100")
                     }
+                    .tint(Color(red: 96, green: 96, blue: 96))
                     
                     HStack {
                         Spacer()
@@ -176,6 +177,7 @@ struct ExperimentSliderGreyscaleView: View {
         DispatchQueue.main.async {
             withAnimation(.easeIn, {
                 input = 0
+                transitionOpacity = 0.0
                 if inTrial {
                     data.consumeTrialColor()
                     selectedColor = data.getTrialColor()

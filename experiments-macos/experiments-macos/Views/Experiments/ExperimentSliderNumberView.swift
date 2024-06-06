@@ -95,7 +95,7 @@ struct ExperimentSliderNumberView: View {
                             .font(.title3)
                             .padding(.bottom, 2)
                         
-                        Text("Click the **\"Next\"** button to indicate a response")
+                        Text("Click the **\"Next\" button or Enter (↩)** to indicate a response")
                             .font(.body)
                             .foregroundStyle(.secondary)
                     }
@@ -106,12 +106,14 @@ struct ExperimentSliderNumberView: View {
                     } maximumValueLabel: {
                         Text("100")
                     }
+                    .tint(Color(red: 96, green: 96, blue: 96))
                     
                     HStack {
                         Spacer()
                         Button("Next") {
                             submitInput()
                         }
+                        .keyboardShortcut(.defaultAction)
                         .buttonStyle(.borderedProminent)
                     }
                 }

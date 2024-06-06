@@ -188,13 +188,20 @@ struct ExperimentGesturePitchGreyscaleView: View {
     
     func consume() {
         DispatchQueue.main.async {
-            withAnimation(.easeIn) {
+            withAnimation(.easeIn, {
+                transitionOpacity = 0.0
                 if inTrial {
                     data.consumeTrialColor()
                     selectedColor = data.getTrialColor()
                 } else {
                     data.consumeColor()
                     selectedColor = data.getColor()
+                }
+            }) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    withAnimation(.easeIn) {
+                        transitionOpacity = 1.0
+                    }
                 }
             }
         }

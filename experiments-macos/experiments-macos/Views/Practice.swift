@@ -97,7 +97,7 @@ struct Practice: View {
                                     Text("Adjust the slider to match the number as closely as possible")
                                 }
                                 
-                                Text("Click the \"Next\" button to indicate a response")
+                                Text("Click the \"Next\" button or Enter (↩) to indicate a response")
                             }
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
@@ -109,6 +109,7 @@ struct Practice: View {
                                 } maximumValueLabel: {
                                     Text("Black")
                                 }
+                                .tint(Color(red: 96, green: 96, blue: 96))
                             } else {
                                 Slider(value: $input, in: 0...100) {
                                 } minimumValueLabel: {
@@ -116,6 +117,7 @@ struct Practice: View {
                                 } maximumValueLabel: {
                                     Text("100")
                                 }
+                                .tint(Color(red: 96, green: 96, blue: 96))
                             }
                             
                             HStack(alignment: .center) {
@@ -144,6 +146,7 @@ struct Practice: View {
                                 Button("Next") {
                                     consume()
                                 }
+                                .keyboardShortcut(.defaultAction)
                                 .buttonStyle(.borderedProminent)
                             }
                         }
