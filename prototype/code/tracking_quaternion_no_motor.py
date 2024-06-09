@@ -2,7 +2,7 @@ import time
 import board
 import digitalio
 import battery_reading
-import on_disk_storage_quaternion
+import on_disk_storage
 import bno_initializer
 import backend
 import supervisor
@@ -29,7 +29,7 @@ def process_data(
     calibration_status,
     quaternion,
 ):
-    on_disk_storage_quaternion.add_to_queue(
+    on_disk_storage.add_to_queue(
         timestamp,
         duration,
         stability,
@@ -89,7 +89,7 @@ while True:
 
     if time.monotonic() - last_write_time > write_interval and button.value:
         battery_reading.log_battery_voltage()
-        on_disk_storage_quaternion.write_to_disk()
+        on_disk_storage.write_to_disk()
         last_write_time = time.monotonic()
 
     time.sleep(0.02)
