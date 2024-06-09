@@ -13,8 +13,12 @@ struct ThankYou: View {
                 .font(.body)
                 .padding(.top, 10)
             
-            Link("Please complete the following survey", destination: URL(string: "https://www.google.com")!)
+            Text("Your participant number is **\(vm.participantNumber)**")
+                .font(.body)
                 .padding(.top, 10)
+            
+            Link("Please complete the following survey", destination: URL(string: "https://forms.gle/7dVZtCupby3Ag5rk8")!)
+                .padding(.top, 1)
             
             Text("Your contribution is much appreciated ❤️")
                 .font(.body)

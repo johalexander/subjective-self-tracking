@@ -31,6 +31,9 @@ class DataViewModel: ObservableObject {
     @Published var newParticipantCount: String = ""
     @Published var participantCount = readParticipantCount()
     
+    @Published var showForceExpStartAlert = false
+    @Published var forceStartIndex: String = ""
+    
     private var colorRepository = Greyscales()
     private var numberRepository = Numbers()
     

@@ -57,6 +57,7 @@ struct Experiments: View {
     @State private var genderIdentity: Gender = Gender.undisclosed
     
     @State private var enabled = false
+    @State private var shouldNavigate = false
 
     let experiments = [
         "Experiment 1: Slider - Greyscale",
@@ -182,6 +183,12 @@ struct Experiments: View {
                                 }
                             }
                         })
+                        
+                        Button("Start Experiments") {
+                            vm.showForceExpStartAlert = true
+                        }
+                        .hidden()
+                        .keyboardShortcut("f")
                     }
                     .animation(.easeIn, value: enabled)
                     .animation(.easeIn, value: age)
@@ -193,6 +200,22 @@ struct Experiments: View {
             participantNumber = readParticipantCount() + 1
         }
         .navigationTitle("🧪 Experiments")
+        .navigationDestination(isPresented: $shouldNavigate, destination: {
+            ExperimentView(experiments: evm, data: vm, participantNumber: participantNumber, age: age, genderIdentity: genderIdentity)
+        })
+        .alert("Force experiment start", isPresented: $vm.showForceExpStartAlert) {
+            TextField("Participant id (current: \(readParticipantCount()))", text: $vm.newParticipantCount)
+            TextField("Starting index", text: $vm.forceStartIndex)
+            Button("Start", action: {
+                participantNumber = Int(vm.newParticipantCount) ?? (readParticipantCount() + 1)
+                vm.updateParticipantCount()
+                evm.participantNumber = participantNumber
+                evm.startAtExperiment(index: Int(vm.forceStartIndex) ?? 0)
+                shouldNavigate = true
+                vm.showAlert = false
+            })
+            Button("Cancel", role: .cancel) {}
+        }
     }
 }
 

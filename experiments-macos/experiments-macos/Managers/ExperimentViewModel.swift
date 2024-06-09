@@ -47,6 +47,14 @@ class ExperimentViewModel: ObservableObject {
             }
         }
     }
+    
+    func startAtExperiment(index: Int) {
+        DispatchQueue.main.async {
+            self.reset()
+            self.currentExperimentIndex = index
+            self.loadData()
+        }
+    }
 
     func saveData() {
         DispatchQueue.main.async {
@@ -58,6 +66,21 @@ class ExperimentViewModel: ObservableObject {
                 let filename = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("experiment_data_\(self.participantNumber).json")
                 try? encodedData.write(to: filename)
                 print("Data saved to \(filename)")
+            }
+        }
+    }
+    
+    func loadData() {
+        DispatchQueue.main.async {
+            let filename = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("experiment_data_\(self.participantNumber).json")
+            if let data = try? Data(contentsOf: filename) {
+                let decoder = JSONDecoder()
+                if let participantData = try? decoder.decode(Participant.self, from: data) {
+                    self.experiments = participantData.completedExperiments
+                    self.id = participantData.id
+                    self.age = participantData.age
+                    self.genderIdentity = participantData.genderIdentity
+                }
             }
         }
     }

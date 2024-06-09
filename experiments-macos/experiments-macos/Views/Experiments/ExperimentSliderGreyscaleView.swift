@@ -116,6 +116,7 @@ struct ExperimentSliderGreyscaleView: View {
                             submitInput()
                         }
                         .buttonStyle(.borderedProminent)
+                        .keyboardShortcut(.defaultAction)
                     }
                 }
                 .padding()
@@ -124,6 +125,7 @@ struct ExperimentSliderGreyscaleView: View {
         }
         .onAppear {
             startedDate = Date.now
+            consume()
         }
         .onChange(of: stimuliCount, { oldValue, newValue in
             if newValue > maxStimuliCount {

@@ -132,6 +132,7 @@ struct ExperimentGesturePitchGreyscaleView: View {
         }
         .onAppear {
             startedDate = Date.now
+            consume()
         }
         .onChange(of: stimuliCount, { oldValue, newValue in
             if newValue > maxStimuliCount {
