@@ -37,7 +37,7 @@ struct ExperimentView: View {
                 ThankYou(vm: experiments)
             }
         }
-        .navigationTitle("Experiment " + "\(experiments.currentExperimentIndex + 1): " + experiments.experimentOrder[experiments.currentExperimentIndex].description)
+        .navigationTitle(navigationTitle)
         .navigationBarBackButtonHidden()
         .animation(.bouncy, value: experiments.currentExperimentIndex)
         .onAppear {
@@ -45,6 +45,13 @@ struct ExperimentView: View {
             saveParticipantCount(experiments.participantNumber)
             data.shuffleStimuli()
         }
+    }
+    
+    var navigationTitle: String {
+        guard experiments.currentExperimentIndex < experiments.experimentOrder.count else {
+            return "✨ Thank you!"
+        }
+        return "Experiment " + "\(experiments.currentExperimentIndex + 1): " + experiments.experimentOrder[experiments.currentExperimentIndex].description
     }
 }
 

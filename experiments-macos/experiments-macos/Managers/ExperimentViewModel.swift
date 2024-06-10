@@ -50,7 +50,10 @@ class ExperimentViewModel: ObservableObject {
     
     func startAtExperiment(index: Int) {
         DispatchQueue.main.async {
-            self.reset()
+            self.experiments.removeAll()
+            self.experimentOrder = self.latinSquare[self.participantNumber % self.latinSquare.count].compactMap {
+                ExperimentType(rawValue: $0)
+            }
             self.currentExperimentIndex = index
             self.loadData()
         }

@@ -6,7 +6,7 @@ import NIOPosix
 @MainActor
 class Server {
     private var app: Application?
-    private let hostname = "172.20.10.2"
+    private let hostname = "172.20.10.4"
     //private let hostname = "192.168.0.3"
 
     func start() async {
