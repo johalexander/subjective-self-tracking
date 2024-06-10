@@ -57,39 +57,43 @@ while True:
     if bno is None:
         break
 
-    button.update()
-    quaternion = bno.quaternion
+    try:
+        button.update()
+        quaternion = bno.quaternion
 
-    if button.fell:
-        timestamp = time.time()
+        if button.fell:
+            timestamp = time.time()
 
-        stability = bno.stability_classification
+            stability = bno.stability_classification
 
-        activity_classification = bno.activity_classification
-        activity = activity_classification["most_likely"]
-        activity_confidence = activity_classification[activity]
+            activity_classification = bno.activity_classification
+            activity = activity_classification["most_likely"]
+            activity_confidence = activity_classification[activity]
 
-        calibration_status = bno.calibration_status
+            calibration_status = bno.calibration_status
 
-    if button.rose:
-        duration = int(button.last_duration * 1e3)
+        if button.rose:
+            duration = int(button.last_duration * 1e3)
 
-        if duration > 15000:
-            supervisor.reload()
+            if duration > 15000:
+                supervisor.reload()
 
-        process_data(
-            timestamp,
-            duration,
-            stability,
-            activity,
-            activity_confidence,
-            calibration_status,
-            quaternion,
-        )
+            process_data(
+                timestamp,
+                duration,
+                stability,
+                activity,
+                activity_confidence,
+                calibration_status,
+                quaternion,
+            )
 
-    if time.monotonic() - last_write_time > write_interval and button.value:
-        battery_reading.log_battery_voltage()
-        on_disk_storage.write_to_disk()
-        last_write_time = time.monotonic()
+        if time.monotonic() - last_write_time > write_interval and button.value:
+            battery_reading.log_battery_voltage()
+            on_disk_storage.write_to_disk()
+            last_write_time = time.monotonic()
 
-    time.sleep(0.02)
+        time.sleep(0.02)
+    except RuntimeError as e:
+        print(f"RuntimeError: BNO board failure: {e}")
+        supervisor.reload()
