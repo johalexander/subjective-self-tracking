@@ -86,7 +86,7 @@ struct Experiments: View {
                     VStack(alignment: .leading) {
                         Text("During the experiments you will be asked to assess greyness of an image and position of a number on a visual scale using a slider. You will also be asked to assess greyness of an image and position of a number on a physical scale using the prototype.")
                             .font(.body)
-                        Text("Each experiment runs with a stimuli count of 20. The approximate time to complete all experiments is 6-10 minutes.")
+                        Text("Each experiment runs with a stimuli count of 20. The approximate time to complete all experiments is 15 minutes.")
                             .font(.body)
                             .padding(.top, 1)
                     }
@@ -132,13 +132,13 @@ struct Experiments: View {
                     Divider().padding(.vertical)
                     
                     VStack(alignment: .leading, spacing: 7) {
-                        Text("Before starting please make sure that the device is powered (lights on).")
+                        Text("Before starting please make sure that the device is fastened to your wrist.")
                             .font(.headline)
                         
                         Text("Make sure to only click once per stimuli. You may be asked to repeat the input for a stimuli.")
                             .font(.headline)
                         
-                        Text("Please be gentle with the device.")
+                        Text("Please be gentle with the device. Avoid hard presses.")
                             .font(.headline)
                             .padding(.bottom)
                         
