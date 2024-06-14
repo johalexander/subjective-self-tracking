@@ -55,6 +55,7 @@ while True:
         break
 
     if bno is None:
+        supervisor.reload()
         break
 
     try:
@@ -94,6 +95,12 @@ while True:
             last_write_time = time.monotonic()
 
         time.sleep(0.02)
+    except OSError as e:
+        print(f"OSError: BNO board failure: {e}")
+        supervisor.reload()
     except RuntimeError as e:
         print(f"RuntimeError: BNO board failure: {e}")
+        supervisor.reload()
+    except Exception as e:
+        print(f"Unexpected error: Failed to initialize BNO board: {e}")
         supervisor.reload()
