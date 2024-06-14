@@ -11,7 +11,7 @@ struct ExperimentSliderGreyscaleView: View {
     @State var maxStimuliCount: Int = 20
     
     @State var trialStimuliCount: Int = 1
-    @State var maxTrialStimuliCount: Int = 5
+    @State var maxTrialStimuliCount: Int = 3
     
     @State var inTrial: Bool = true
     
@@ -104,9 +104,9 @@ struct ExperimentSliderGreyscaleView: View {
                     
                     Slider(value: $input, in: 0...49) {
                     } minimumValueLabel: {
-                        Text("0")
+                        Text("White")
                     } maximumValueLabel: {
-                        Text("100")
+                        Text("Black")
                     }
                     .tint(Color(red: 96, green: 96, blue: 96))
                     
@@ -157,7 +157,7 @@ struct ExperimentSliderGreyscaleView: View {
     }
     
     func addStimuli(successful: Bool) {
-        let stimuli = Stimuli(id: String(stimuliCount), value: input, inputType: .slider, sensorReading: data.associatedReading)
+        let stimuli = Stimuli(id: String(stimuliCount), value: input, truth: Double(data.getColorId()), inputType: .slider, sensorReading: data.associatedReading)
         if successful {
             successfulStimuli.append(stimuli)
         } else {

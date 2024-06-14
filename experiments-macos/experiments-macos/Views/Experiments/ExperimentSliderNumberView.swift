@@ -11,7 +11,7 @@ struct ExperimentSliderNumberView: View {
     @State var maxStimuliCount: Int = 20
     
     @State var trialStimuliCount: Int = 1
-    @State var maxTrialStimuliCount: Int = 5
+    @State var maxTrialStimuliCount: Int = 3
     
     @State var inTrial: Bool = true
     
@@ -155,7 +155,7 @@ struct ExperimentSliderNumberView: View {
     }
     
     func addStimuli(successful: Bool) {
-        let stimuli = Stimuli(id: String(stimuliCount), value: input, inputType: .slider, sensorReading: data.associatedReading)
+        let stimuli = Stimuli(id: String(stimuliCount), value: input, truth: Double(selectedNumber) ?? 0.0, inputType: .slider, sensorReading: data.associatedReading)
         if successful {
             successfulStimuli.append(stimuli)
         } else {

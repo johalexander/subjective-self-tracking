@@ -19,6 +19,7 @@ struct Experiment: Identifiable, Codable {
 struct Stimuli: Identifiable, Codable {
     let id: String
     let value: Double
+    let truth: Double
     let inputType: InputType
     let sensorReading: SensorReading
 }

@@ -8,7 +8,7 @@ struct ExperimentGesturePitchGreyscaleView: View {
     @State var maxStimuliCount: Int = 20
     
     @State var trialStimuliCount: Int = 1
-    @State var maxTrialStimuliCount: Int = 5
+    @State var maxTrialStimuliCount: Int = 3
     
     @State var inTrial: Bool = true
     
@@ -169,7 +169,7 @@ struct ExperimentGesturePitchGreyscaleView: View {
     }
     
     func addStimuli(successful: Bool) {
-        let stimuli = Stimuli(id: String(stimuliCount), value: 0.0, inputType: .device, sensorReading: data.associatedReading)
+        let stimuli = Stimuli(id: String(stimuliCount), value: 0.0, truth: Double(data.getColorId()), inputType: .device, sensorReading: data.associatedReading)
         if successful {
             successfulStimuli.append(stimuli)
         } else {
