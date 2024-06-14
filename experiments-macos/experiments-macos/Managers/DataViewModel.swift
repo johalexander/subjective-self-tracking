@@ -191,6 +191,12 @@ class DataViewModel: ObservableObject {
         }
     }
     
+    func appendTrialScales() {
+        DispatchQueue.main.async {
+            self.colorRepository.appendTrialShades()
+        }
+    }
+    
     func shuffleStimuli() {
         DispatchQueue.main.async {
             self.colorRepository = Greyscales()

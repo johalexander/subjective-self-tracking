@@ -133,6 +133,7 @@ struct ExperimentGestureRollGreyscaleView: View {
         }
         .onAppear {
             startedDate = Date.now
+            data.appendTrialScales()
             consume()
         }
         .onChange(of: stimuliCount, { oldValue, newValue in

@@ -88,6 +88,22 @@ class Greyscales {
         }
     }
     
+    func appendTrialShades() {
+        let whiteScale = self.trialColors.filter {
+            $0.id <= 16
+        }.shuffled().last.unsafelyUnwrapped
+        let greyScale = self.generatedColors.filter {
+            $0.id >= 17 && $0.id <= 33
+        }.shuffled().last.unsafelyUnwrapped
+        let blackScale = self.generatedColors.filter {
+            $0.id >= 34 && $0.id <= 49
+        }.shuffled().last.unsafelyUnwrapped
+        
+        self.trialColors.append(whiteScale)
+        self.trialColors.append(greyScale)
+        self.trialColors.append(blackScale)
+    }
+    
     init() {
         self.queuedColors = self.generatedColors.shuffled()
         self.trialColors = self.generatedColors.shuffled()
