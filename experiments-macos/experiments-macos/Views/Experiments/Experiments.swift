@@ -66,15 +66,6 @@ struct Experiments: View {
     @State private var enabled = false
     @State private var shouldNavigate = false
 
-    let experiments = [
-        "Experiment 1: Slider - Greyscale",
-        "Experiment 2: Slider - Number",
-        "Experiment 3: Gesture: Pitch - Greyscale",
-        "Experiment 4: Gesture: Pitch - Number",
-        "Experiment 5: Gesture: Roll - Greyscale",
-        "Experiment 6: Gesture: Roll - Number"
-    ]
-
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -86,22 +77,21 @@ struct Experiments: View {
                     VStack(alignment: .leading) {
                         Text("During the experiments you will be asked to assess greyness of an image and position of a number on a visual scale using a slider. You will also be asked to assess greyness of an image and position of a number on a physical scale using the prototype.")
                             .font(.body)
-                        Text("Each experiment runs with a stimuli count of 20. The approximate time to complete all experiments is 15 minutes.")
+                        Text("For each experiment, you will be asked to indicate a response to **20 different stimuli**.")
+                            .font(.body)
+                            .padding(.top, 1)
+                        Text("Prior to each experiment, there are **3 trial attempts** for the task context. They are not a part of the experiment.")
+                            .font(.body)
+                            .padding(.top, 1)
+                        Text("The approximate time to complete all experiments is **15 minutes**.")
                             .font(.body)
                             .padding(.top, 1)
                     }
                     .padding(.vertical)
-
-                    ForEach(experiments, id: \.self) { experiment in
-                        Text(experiment)
-                            .font(.body)
-                            .padding(.bottom, 2)
-                    }
                     
                     Text("The order of the experiments is determined by a Latin square design to minimize order effects.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                        .padding(.top, 2)
 
                     Divider().padding(.vertical)
                     
