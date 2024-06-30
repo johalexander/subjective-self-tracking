@@ -1,3 +1,10 @@
+//
+//  SquareImage.swift
+//  Subjective Self Tracking
+//
+//  Alexander Johansson 2024
+//
+
 import SwiftUI
 
 struct SquareImage: View {

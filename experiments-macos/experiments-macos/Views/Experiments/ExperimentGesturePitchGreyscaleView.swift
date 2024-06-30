@@ -1,3 +1,10 @@
+//
+//  ExperimentGesturePitchGreyscaleView.swift
+//  Subjective Self Tracking
+//
+//  Alexander Johansson 2024
+//
+
 import SwiftUI
 
 struct ExperimentGesturePitchGreyscaleView: View {

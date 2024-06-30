@@ -1,3 +1,10 @@
+//
+//  Server.swift
+//  Subjective Self Tracking
+//
+//  Alexander Johansson 2024
+//
+
 import Vapor
 import Logging
 import NIOCore

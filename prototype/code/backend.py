@@ -7,7 +7,7 @@ import time
 import os
 import rtc
 
-DATA_POST_URL = "http://172.20.10.2:8080/data"
+DATA_POST_URL = "http://172.20.10.4:8080/data"
 
 
 pool = adafruit_connection_manager.get_radio_socketpool(wifi.radio)

@@ -1,8 +1,8 @@
 //
-//  experiments_macosApp.swift
-//  experiments-macos
+//  SubjectiveSelfTrackingApp.swift
+//  Subjective Self Tracking
 //
-//  Created by Alexander Johansson on 17/05/2024.
+//  Alexander Johansson 2024
 //
 
 import SwiftUI
