@@ -2,7 +2,7 @@
 //  Greyscales.swift
 //  Subjective Self Tracking
 //
-//  Created by Alexander Johansson on 18/05/2024.
+//  Alexander Johansson 2024
 //
 
 import Foundation

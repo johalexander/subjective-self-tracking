@@ -1,3 +1,10 @@
+//
+//  ExperimentViewModel.swift
+//  Subjective Self Tracking
+//
+//  Alexander Johansson 2024
+//
+
 import SwiftUI
 
 class ExperimentViewModel: ObservableObject {

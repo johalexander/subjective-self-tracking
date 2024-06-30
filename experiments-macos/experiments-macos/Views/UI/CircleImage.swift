@@ -1,3 +1,10 @@
+//
+//  CircleImage.swift
+//  Subjective Self Tracking
+//
+//  Alexander Johansson 2024
+//
+
 import SwiftUI
 
 struct CircleImage: View {

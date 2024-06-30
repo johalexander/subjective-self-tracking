@@ -2,7 +2,7 @@
 //  DataModelManager.swift
 //  Subjective Self Tracking
 //
-//  Created by Alexander Johansson on 19/05/2024.
+//  Alexander Johansson 2024
 //
 
 import Foundation
