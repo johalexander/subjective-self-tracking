@@ -33,3 +33,4 @@ def quaternion_to_euler(w, x, y, z):
     yaw = math.atan2(siny_cosp, cosy_cosp)
 
     return roll, pitch, yaw
+

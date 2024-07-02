@@ -1,5 +1,6 @@
 jupyter
 numpy
 pandas
-matplotlib.pyplot
+matplotlib
 seaborn
+plotly
