@@ -10,10 +10,10 @@ def add_to_queue(
     activity,
     activity_confidence,
     calibration_status,
-    w,
     x,
     y,
     z,
+    w,
 ):
     global write_queue
     write_queue.append(
@@ -24,10 +24,10 @@ def add_to_queue(
             "activity": activity,
             "activity_confidence": activity_confidence,
             "calibration_status": calibration_status,
-            "w": w,
             "x": x,
             "y": y,
             "z": z,
+            "w": w,
         }
     )
 
@@ -44,14 +44,14 @@ def add_to_queue(
         activity_confidence,
         "Calibration status:",
         calibration_status,
-        "w:",
-        w,
         "x:",
         x,
         "y:",
         y,
         "z:",
         z,
+        "w:",
+        w,
     )
 
 
@@ -70,10 +70,10 @@ def write_to_disk():
                     item["activity"],
                     item["activity_confidence"],
                     item["calibration_status"],
-                    item["w"],
                     item["x"],
                     item["y"],
                     item["z"],
+                    item["w"],
                 )
             )
 

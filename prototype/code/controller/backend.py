@@ -22,10 +22,10 @@ def send_data(
     activity,
     activity_confidence,
     calibration_status,
-    w,
     x,
     y,
     z,
+    w,
 ):
     body = {
         "timestamp": timestamp,
@@ -34,10 +34,10 @@ def send_data(
         "activity": activity,
         "activity_confidence": activity_confidence,
         "calibration_status": calibration_status,
-        "w": w,
         "x": x,
         "y": y,
         "z": z,
+        "w": w,
     }
 
     try:
