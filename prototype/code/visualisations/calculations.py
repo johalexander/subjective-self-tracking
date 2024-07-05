@@ -22,19 +22,19 @@ def quaternion_to_euler(x, y, z, w):
 
 
 # Scaling of input value
-def scale_value(value, scale, min_value, max_value, clamp=False):
+def scale_value(value, scale, max_angle, clamp=True):
     absolute = abs(value)
+    scaled = round((absolute / max_angle) * scale)
     if clamp:
-        clamped = max(min_value, min(absolute, max_value))
-    else:
-        clamped = absolute
-    return round((clamped / max_value) * scale)
+        return max(0, min(scaled, scale))
+    
+    return scaled
 
 
 def scale_roll(roll, scale):
-    return scale_value(roll, scale, 0.0, 90.0)
+    return scale_value(roll, scale, 90.0)
 
 
 def scale_pitch(pitch, scale):
-    return scale_value(pitch, scale, 0.0, 90.0)
+    return scale_value(pitch, scale, 90.0)
 
