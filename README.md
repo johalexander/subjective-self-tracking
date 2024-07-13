@@ -26,7 +26,7 @@ The `experiments-macos` project has been built using Xcode 15.4 and can be run l
 The Experiments screen allows for forcing an experiment start through **CMD + F**. This will bring up a prompt that asks which participant id and experiment index to begin with.
 
 ### Prototype
-The prototype is built using an [Adafruit Huzzah32](https://www.adafruit.com/product/3405) microcontroller and a [Adafruit BNO085](https://www.adafruit.com/product/4754) sensor board. The prototype wiring can be found in the published thesis paper.
+The prototype is built using an [Adafruit Huzzah32](https://www.adafruit.com/product/3405) microcontroller and a [Adafruit BNO085](https://www.adafruit.com/product/4754) sensor board. This section assumes knowledge of how to flash and install CircuitPython, and physical assembly. The device may be restarted from REPL with **CTRL + D**. Code execution can be interrupted with **CTRL + C**.
 
 Code under `/prototype/code/controller/` is CircuitPython code that can be deployed to the microcontroller. The code is dependant on a few CircuitPython [libraries](https://circuitpython.org/libraries):
 * adafruit_connection_manager
@@ -53,7 +53,9 @@ The main file can be replaced depending on need. **Note: backend.py defines an U
 The prototype code has been tested and run with CircuitPython 9.0.5.
 
 #### Schematics and models
-Fritzing schematics for the prototype are available under `/prototype/schematics/`.
+The prototype assembly is detailed in the published thesis paper.
+
+Fritzing schematics (wiring) for the prototype are available under `/prototype/schematics/`.
 
 Blender models for the prototype are available under `/prototype/models/`.
 
