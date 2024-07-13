@@ -80,10 +80,6 @@ while True:
     try:
         button.update()
         quaternion = bno.quaternion
-        
-        x, y, z, w = quaternion
-        heading, roll, pitch = quaternion_to_euler(x, y, z, w)
-        print(roll, pitch)
 
         if button.fell:
             timestamp = time.time()
@@ -111,13 +107,17 @@ while True:
                 calibration_status,
                 quaternion,
             )
+            
+            x, y, z, w = quaternion
+            heading, roll, pitch = quaternion_to_euler(x, y, z, w)
+            print(roll, pitch)
 
         if time.monotonic() - last_write_time > write_interval and button.value:
             battery_reading.log_battery_voltage()
             on_disk_storage.write_to_disk()
             last_write_time = time.monotonic()
 
-        time.sleep(0.4)
+        time.sleep(0.02)
     except OSError as e:
         print(f"OSError: BNO board failure: {e}")
         supervisor.reload()
