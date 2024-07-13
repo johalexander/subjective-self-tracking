@@ -23,18 +23,49 @@ The `experiments-macos` project has been built using Xcode 15.4 and can be run l
 
 `Server.swift` hardcodes an IP address to bind the web server to. The web server will accept requests at https://ipaddress:8080 per default.
 
+The Experiments screen allows for forcing an experiment start through **CMD + F**. This will bring up a prompt that asks which participant id and experiment index to begin with.
+
 ### Prototype
 The prototype is built using an [Adafruit Huzzah32](https://www.adafruit.com/product/3405) microcontroller and a [Adafruit BNO085](https://www.adafruit.com/product/4754) sensor board. The prototype wiring can be found in the published thesis paper.
 
-Code under `/prototype/code/` is CircuitPython code that can be deployed to the microcontroller. The code is dependant on a few CircuitPython [libraries](https://circuitpython.org/libraries):
+Code under `/prototype/code/controller/` is CircuitPython code that can be deployed to the microcontroller. The code is dependant on a few CircuitPython [libraries](https://circuitpython.org/libraries):
 * adafruit_connection_manager
 * adafruit_requests
 * adafruit_ntp
 * adafruit_bno08x
 * adafruit_debouncer
 
+There are three different main files:
+* **tracking_quaternion_no_motor.py**
+  * **Default** main file to be used (as code.py)
+  * No motor pin considered
+  * Raw data output
+* tracking_quaternion_no_motor_euler_calc.py
+  * Calculates and prints roll, pitch in REPL on click
+  * Expensive math operations, delays main loop
+  * Raw data output
+* tracking_quaternion_with_motor.py
+  * Motor pin is considered
+  * Raw data output
+ 
+The main file can be replaced depending on need. **Note: backend.py defines an URI resource to send device data to.**
+
 The prototype code has been tested and run with CircuitPython 9.0.5.
 
-Blender models for the prototype is available under `/prototype/models/`.
+#### Schematics and models
+Fritzing schematics for the prototype are available under `/prototype/schematics/`.
 
-Visualisation tools for generated data can be found in the code folder.
+Blender models for the prototype are available under `/prototype/models/`.
+
+### Visualisations
+Visualisation tools for generated data can be found in the code folder under `/prototype/code/visualisations/`.
+
+To run the Python Jupyter Notebooks, from the directory you will have to:
+1. Create a [virtual environment](https://docs.python.org/3/library/venv.html)
+2. Run `pip install -r requirements.txt`
+3. Notebooks are now runnable with the created kernel
+
+To view visualisations without running them locally, [NBViewer](https://nbviewer.org/) can be utilised.
+Enter the desired URL into the web page, and _voila_!
+
+Example: https://nbviewer.org/github/johalexander/subjective-self-tracking/blob/main/prototype/code/visualisations/visualisations_app.ipynb
