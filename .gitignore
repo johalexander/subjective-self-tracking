@@ -29,6 +29,7 @@ xcuserdata/
 MANIFEST
 dist/
 build/
+.venv
 
 # Backup files
 *~.nib
