@@ -131,6 +131,11 @@ struct ExperimentGestureRollNumberView: View {
                         }
                     }
                     .animation(.easeIn, value: data.receivedData.successful)
+                    Button("Skip") {
+                        submitInput()
+                    }
+                    .hidden()
+                    .keyboardShortcut("s")
                 }
                 .padding()
             }
