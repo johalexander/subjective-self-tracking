@@ -122,6 +122,11 @@ struct ExperimentSliderNumberView: View {
                         }
                         .keyboardShortcut(.defaultAction)
                         .buttonStyle(.borderedProminent)
+                        Button("Next Experiment") {
+                            experiments.nextExperiment()
+                        }
+                        .hidden()
+                        .keyboardShortcut("d")
                     }
                 }
                 .padding()

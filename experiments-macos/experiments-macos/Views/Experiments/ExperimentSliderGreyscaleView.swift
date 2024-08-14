@@ -124,6 +124,11 @@ struct ExperimentSliderGreyscaleView: View {
                         }
                         .buttonStyle(.borderedProminent)
                         .keyboardShortcut(.defaultAction)
+                        Button("Next Experiment") {
+                            experiments.nextExperiment()
+                        }
+                        .hidden()
+                        .keyboardShortcut("d")
                     }
                 }
                 .padding()

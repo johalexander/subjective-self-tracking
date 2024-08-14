@@ -138,6 +138,11 @@ struct ExperimentGestureRollGreyscaleView: View {
                     }
                     .hidden()
                     .keyboardShortcut("s")
+                    Button("Next Experiment") {
+                        experiments.nextExperiment()
+                    }
+                    .hidden()
+                    .keyboardShortcut("d")
                 }
                 .padding()
             }
